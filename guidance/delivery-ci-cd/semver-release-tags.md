@@ -3,6 +3,7 @@ id: cicd-semver-release-tags
 title: Tag releases with a semantic version
 domain: Delivery & CI/CD
 severity: Strategic
+enforcement: central
 status: active
 since: 0.1.0
 tags: [releases, versioning, semver, tags]

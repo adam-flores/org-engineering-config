@@ -3,6 +3,7 @@ id: qual-accessibility-checks
 title: UI must pass automated accessibility checks
 domain: Quality & Testing
 severity: Strategic
+enforcement: central
 status: active
 since: 0.1.0
 tags: [testing, accessibility, a11y, ui]

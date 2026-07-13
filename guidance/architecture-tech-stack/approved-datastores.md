@@ -3,6 +3,7 @@ id: arch-approved-datastores
 title: Prefer Postgres, file/document storage, or no database
 domain: Architecture & Tech Stack
 severity: Handbook
+enforcement: none
 status: active
 since: 0.1.0
 tags: [database, postgres, storage, persistence]

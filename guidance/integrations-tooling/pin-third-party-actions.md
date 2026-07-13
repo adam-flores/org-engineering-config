@@ -3,6 +3,7 @@ id: integ-pin-third-party-actions
 title: Pin third-party CI actions and dependencies by digest
 domain: Integrations & Tooling
 severity: Handbook
+enforcement: central
 status: active
 since: 0.1.0
 tags: [supply-chain, pinning, ci]

@@ -3,6 +3,7 @@ id: cicd-deploy-via-pipeline
 title: Deploy through the pipeline, not by hand
 domain: Delivery & CI/CD
 severity: Strategic
+enforcement: central
 status: active
 since: 0.1.0
 tags: [deployment, pipeline, environments, promotion, approvals]

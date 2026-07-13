@@ -3,6 +3,7 @@ id: obs-logs-to-approved-sink
 title: Emit logs and telemetry to an approved sink
 domain: Observability & Data
 severity: Handbook
+enforcement: retroactive
 status: active
 since: 0.1.0
 tags: [logging, telemetry, retention]

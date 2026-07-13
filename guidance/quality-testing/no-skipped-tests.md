@@ -3,6 +3,7 @@ id: qual-no-skipped-tests
 title: No skipped, disabled, or focused tests merged
 domain: Quality & Testing
 severity: Strategic
+enforcement: central
 status: active
 since: 0.1.0
 tags: [testing, skip, focus, discipline]

@@ -3,6 +3,7 @@ id: integ-approved-tools
 title: Use the approved tool for each capability
 domain: Integrations & Tooling
 severity: Handbook
+enforcement: none
 status: active
 since: 0.1.0
 tags: [tooling, registry, approved-tools, github, claude, mermaid, notion, playwright]

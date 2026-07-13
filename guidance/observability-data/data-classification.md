@@ -3,6 +3,7 @@ id: obs-data-classification
 title: Classify data and handle it by its class
 domain: Observability & Data
 severity: Handbook
+enforcement: retroactive
 status: active
 since: 0.1.0
 tags: [data-classification, pii, governance, privacy]

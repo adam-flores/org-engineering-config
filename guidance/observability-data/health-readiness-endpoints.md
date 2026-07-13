@@ -3,6 +3,7 @@ id: obs-health-readiness-endpoints
 title: Expose health and readiness endpoints
 domain: Observability & Data
 severity: Handbook
+enforcement: retroactive
 status: active
 since: 0.1.0
 tags: [health-check, readiness, observability, deployment]

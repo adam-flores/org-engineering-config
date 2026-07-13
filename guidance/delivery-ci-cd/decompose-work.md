@@ -3,6 +3,7 @@ id: cicd-decompose-work
 title: Decompose work into small, independently branched pieces
 domain: Delivery & CI/CD
 severity: Handbook
+enforcement: none
 status: active
 since: 0.1.0
 tags: [planning, decomposition, branching, workflow]

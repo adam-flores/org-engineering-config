@@ -3,6 +3,7 @@ id: cicd-small-changesets
 title: Prefer small commits and pull requests
 domain: Delivery & CI/CD
 severity: Handbook
+enforcement: central
 status: active
 since: 0.1.0
 tags: [commits, pull-requests, review, size]

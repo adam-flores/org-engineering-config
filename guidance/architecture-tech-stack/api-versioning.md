@@ -3,6 +3,7 @@ id: arch-api-versioning
 title: Version APIs and preserve backward compatibility
 domain: Architecture & Tech Stack
 severity: Handbook
+enforcement: none
 status: active
 since: 0.1.0
 tags: [api, versioning, compatibility]

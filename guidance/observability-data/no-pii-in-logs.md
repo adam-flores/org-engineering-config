@@ -3,6 +3,7 @@ id: obs-no-pii-in-logs
 title: Keep secrets and PII out of logs and telemetry
 domain: Observability & Data
 severity: Handbook
+enforcement: retroactive
 status: active
 since: 0.1.0
 tags: [pii, secrets, logging, privacy, data-in-telemetry]

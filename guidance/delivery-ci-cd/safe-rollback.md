@@ -3,6 +3,7 @@ id: cicd-safe-rollback
 title: Every release must have a safe rollback path
 domain: Delivery & CI/CD
 severity: Handbook
+enforcement: none
 status: active
 since: 0.1.0
 tags: [rollback, releases, recovery, deployment]

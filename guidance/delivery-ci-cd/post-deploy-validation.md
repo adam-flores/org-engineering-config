@@ -3,6 +3,7 @@ id: cicd-post-deploy-validation
 title: Validate deployments after release
 domain: Delivery & CI/CD
 severity: Handbook
+enforcement: retroactive
 status: active
 since: 0.1.0
 tags: [deployment, validation, smoke-tests, health-checks, rollback]

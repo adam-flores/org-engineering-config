@@ -3,6 +3,7 @@ id: integ-ai-usage-guardrails
 title: Use only approved AI tools with company code
 domain: Integrations & Tooling
 severity: Handbook
+enforcement: none
 status: active
 since: 0.1.0
 tags: [ai, guardrails, data-protection, claude]

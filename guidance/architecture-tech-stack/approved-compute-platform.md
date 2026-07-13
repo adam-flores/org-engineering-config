@@ -3,6 +3,7 @@ id: arch-approved-compute-platform
 title: Prefer AWS and serverless; containerize with Docker when needed
 domain: Architecture & Tech Stack
 severity: Handbook
+enforcement: none
 status: active
 since: 0.1.0
 tags: [aws, serverless, containers, docker, hosting]

@@ -3,6 +3,7 @@ id: env-shared-formatter-config
 title: Use the shared formatter and linter configuration
 domain: Developer Environment
 severity: Handbook
+enforcement: local
 status: active
 since: 0.1.0
 tags: [formatting, linting, consistency]

@@ -3,6 +3,7 @@ id: obs-analytics-event-schema
 title: Follow an agreed schema for analytics events
 domain: Observability & Data
 severity: Handbook
+enforcement: none
 status: active
 since: 0.1.0
 tags: [analytics, events, schema, tracking-plan, data-quality]

@@ -3,6 +3,7 @@ id: env-local-secrets-handling
 title: Handle local secrets safely
 domain: Developer Environment
 severity: Handbook
+enforcement: local
 status: active
 since: 0.1.0
 tags: [secrets, local, dotenv, credentials]

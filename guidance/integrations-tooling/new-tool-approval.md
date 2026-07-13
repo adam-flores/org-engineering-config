@@ -3,6 +3,7 @@ id: integ-new-tool-approval
 title: Route new tools through the approval path
 domain: Integrations & Tooling
 severity: Handbook
+enforcement: none
 status: active
 since: 0.1.0
 tags: [governance, tooling, approval, process]

@@ -3,6 +3,7 @@ id: arch-service-boundaries
 title: Cross service boundaries through APIs, not shared databases
 domain: Architecture & Tech Stack
 severity: Handbook
+enforcement: none
 status: active
 since: 0.1.0
 tags: [service-boundaries, data-ownership, coupling]

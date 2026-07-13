@@ -3,6 +3,7 @@ id: sec-no-plaintext-secrets
 title: Never commit plaintext secrets to source control
 domain: Security & Compliance
 severity: Policy
+enforcement: central
 status: active
 since: 0.1.0
 tags: [secrets, credentials]

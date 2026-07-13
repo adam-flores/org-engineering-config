@@ -3,6 +3,7 @@ id: qual-regression-test-for-bugfix
 title: Add a regression test with every bug fix
 domain: Quality & Testing
 severity: Handbook
+enforcement: none
 status: active
 since: 0.1.0
 tags: [testing, regressions]

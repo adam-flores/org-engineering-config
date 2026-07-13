@@ -3,6 +3,7 @@ id: obs-telemetry-retention
 title: Define retention windows for telemetry
 domain: Observability & Data
 severity: Handbook
+enforcement: retroactive
 status: active
 since: 0.1.0
 tags: [retention, logging, telemetry, data-lifecycle]

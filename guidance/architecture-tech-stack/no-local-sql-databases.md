@@ -3,6 +3,7 @@ id: arch-no-local-sql-databases
 title: No SQLite or local/embedded SQL databases
 domain: Architecture & Tech Stack
 severity: Strategic
+enforcement: central
 status: active
 since: 0.1.0
 tags: [database, sqlite, persistence, prohibition]

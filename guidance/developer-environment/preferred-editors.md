@@ -3,6 +3,7 @@ id: env-preferred-editors
 title: Prefer VS Code or the terminal as the editor
 domain: Developer Environment
 severity: Handbook
+enforcement: none
 status: active
 since: 0.1.0
 tags: [editor, ide, vscode, terminal]

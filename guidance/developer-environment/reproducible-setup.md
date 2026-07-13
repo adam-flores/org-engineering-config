@@ -3,6 +3,7 @@ id: env-reproducible-setup
 title: Make local setup reproducible
 domain: Developer Environment
 severity: Handbook
+enforcement: retroactive
 status: active
 since: 0.1.0
 tags: [onboarding, devcontainer, bootstrap, reproducibility]

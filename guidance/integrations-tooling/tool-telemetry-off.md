@@ -3,6 +3,7 @@ id: integ-tool-telemetry-off
 title: Disable tool telemetry and usage tracking
 domain: Integrations & Tooling
 severity: Handbook
+enforcement: none
 status: active
 since: 0.1.0
 tags: [telemetry, privacy, tooling, configuration]

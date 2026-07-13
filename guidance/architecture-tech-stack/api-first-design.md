@@ -3,6 +3,7 @@ id: arch-api-first-design
 title: Design the API contract first
 domain: Architecture & Tech Stack
 severity: Handbook
+enforcement: none
 status: active
 since: 0.1.0
 tags: [api, design, contracts]

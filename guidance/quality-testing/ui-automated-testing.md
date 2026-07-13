@@ -3,6 +3,7 @@ id: qual-ui-automated-testing
 title: UI development must have automated tests
 domain: Quality & Testing
 severity: Strategic
+enforcement: central
 status: active
 since: 0.1.0
 tags: [testing, ui, e2e, playwright, automation]

@@ -3,6 +3,7 @@ id: integ-denylist-tools
 title: Prohibited tools must not be used
 domain: Integrations & Tooling
 severity: Policy
+enforcement: central
 status: active
 since: 0.1.0
 tags: [tooling, denylist, prohibited, compliance]

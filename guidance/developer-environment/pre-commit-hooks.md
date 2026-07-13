@@ -3,6 +3,7 @@ id: env-pre-commit-hooks
 title: Provide standard pre-commit hooks
 domain: Developer Environment
 severity: Handbook
+enforcement: local
 status: active
 since: 0.1.0
 tags: [pre-commit, hooks, formatting, scanning, shift-left]

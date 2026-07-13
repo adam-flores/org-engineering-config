@@ -3,6 +3,7 @@ id: env-pinned-tool-versions
 title: Pin local runtime and tool versions
 domain: Developer Environment
 severity: Handbook
+enforcement: retroactive
 status: active
 since: 0.1.0
 tags: [versions, toolchain, reproducibility, mise, nvm]

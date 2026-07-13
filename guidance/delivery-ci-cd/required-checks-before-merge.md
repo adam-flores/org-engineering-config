@@ -3,6 +3,7 @@ id: cicd-required-checks-before-merge
 title: Gate every merge on required CI checks
 domain: Delivery & CI/CD
 severity: Strategic
+enforcement: central
 status: active
 since: 0.1.0
 tags: [ci, branch-protection, merge]

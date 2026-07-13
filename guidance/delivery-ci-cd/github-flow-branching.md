@@ -3,6 +3,7 @@ id: cicd-github-flow-branching
 title: Follow GitHub Flow for branching
 domain: Delivery & CI/CD
 severity: Strategic
+enforcement: central
 status: active
 since: 0.1.0
 tags: [branching, github-flow, workflow]

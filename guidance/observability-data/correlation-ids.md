@@ -3,6 +3,7 @@ id: obs-correlation-ids
 title: Propagate correlation IDs across services
 domain: Observability & Data
 severity: Handbook
+enforcement: none
 status: active
 since: 0.1.0
 tags: [tracing, correlation-id, observability, distributed]

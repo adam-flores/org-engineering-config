@@ -3,6 +3,7 @@ id: cicd-required-peer-review
 title: Require an approving peer review before merge
 domain: Delivery & CI/CD
 severity: Strategic
+enforcement: central
 status: active
 since: 0.1.0
 tags: [code-review, pull-requests, branch-protection]

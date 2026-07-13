@@ -3,6 +3,7 @@ id: qual-deterministic-tests
 title: Tests must be deterministic and isolated
 domain: Quality & Testing
 severity: Handbook
+enforcement: retroactive
 status: active
 since: 0.1.0
 tags: [testing, flaky, determinism, isolation]

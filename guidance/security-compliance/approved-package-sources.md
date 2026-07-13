@@ -3,6 +3,7 @@ id: sec-approved-package-sources
 title: Install packages only from approved, reputable registries
 domain: Security & Compliance
 severity: Strategic
+enforcement: central
 status: active
 since: 0.1.0
 tags: [security, supply-chain, dependencies, registries, packages]

@@ -3,6 +3,7 @@ id: integ-dependency-licenses
 title: Third-party dependencies must use allowed licenses
 domain: Integrations & Tooling
 severity: Strategic
+enforcement: central
 status: active
 since: 0.1.0
 tags: [licensing, dependencies, supply-chain, compliance]

@@ -3,6 +3,7 @@ id: obs-structured-logging
 title: Emit structured logs with consistent fields
 domain: Observability & Data
 severity: Handbook
+enforcement: retroactive
 status: active
 since: 0.1.0
 tags: [logging, structured, observability]

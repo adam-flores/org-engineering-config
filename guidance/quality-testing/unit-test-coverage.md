@@ -3,6 +3,7 @@ id: qual-unit-test-coverage
 title: Meet the unit-test coverage bar on new code
 domain: Quality & Testing
 severity: Strategic
+enforcement: central
 status: active
 since: 0.1.0
 tags: [testing, coverage, unit-tests]

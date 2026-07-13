@@ -3,6 +3,7 @@ id: cicd-delete-merged-branches
 title: Delete branches after they merge
 domain: Delivery & CI/CD
 severity: Handbook
+enforcement: central
 status: active
 since: 0.1.0
 tags: [branching, github-flow, hygiene]

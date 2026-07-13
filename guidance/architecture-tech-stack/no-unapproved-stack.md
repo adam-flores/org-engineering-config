@@ -3,6 +3,7 @@ id: arch-no-unapproved-stack
 title: No frontend frameworks or API languages outside the approved set
 domain: Architecture & Tech Stack
 severity: Strategic
+enforcement: central
 status: active
 since: 0.1.0
 tags: [frontend, backend, languages, frameworks, tech-stack, prohibition]

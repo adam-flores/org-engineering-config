@@ -3,6 +3,7 @@ id: arch-approved-app-stack
 title: Build on approved frontend and API stacks
 domain: Architecture & Tech Stack
 severity: Handbook
+enforcement: none
 status: active
 since: 0.1.0
 tags: [frontend, backend, languages, frameworks, tech-stack]

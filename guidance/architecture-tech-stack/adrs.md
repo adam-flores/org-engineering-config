@@ -3,6 +3,7 @@ id: arch-adrs
 title: Record significant decisions as ADRs
 domain: Architecture & Tech Stack
 severity: Handbook
+enforcement: retroactive
 status: active
 since: 0.1.0
 tags: [documentation, adr, decisions]

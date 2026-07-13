@@ -3,6 +3,7 @@ id: arch-infrastructure-as-code
 title: Provision infrastructure as code with Terraform
 domain: Architecture & Tech Stack
 severity: Strategic
+enforcement: central
 status: active
 since: 0.1.0
 tags: [iac, terraform, provisioning, infrastructure]
