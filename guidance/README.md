@@ -44,6 +44,7 @@ defined in [`../docs/GUIDANCE-SCHEMA.md`](../docs/GUIDANCE-SCHEMA.md).
 | [`cicd-decompose-work`](delivery-ci-cd/decompose-work.md) | Decompose work into small, independently branched pieces | Handbook |
 | [`cicd-small-changesets`](delivery-ci-cd/small-changesets.md) | Prefer small commits and pull requests | Handbook |
 | [`cicd-safe-rollback`](delivery-ci-cd/safe-rollback.md) | Every release must have a safe rollback path | Handbook |
+| [`cicd-post-deploy-validation`](delivery-ci-cd/post-deploy-validation.md) | Validate deployments after release | Handbook |
 | [`cicd-delete-merged-branches`](delivery-ci-cd/delete-merged-branches.md) | Delete branches after they merge | Handbook |
 
 ## Quality & Testing
