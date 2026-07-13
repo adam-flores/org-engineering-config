@@ -2,7 +2,7 @@
 id: arch-infrastructure-as-code
 title: Provision infrastructure as code with Terraform
 domain: Architecture & Tech Stack
-severity: Handbook
+severity: Strategic
 status: active
 since: 0.1.0
 tags: [iac, terraform, provisioning, infrastructure]
@@ -10,9 +10,9 @@ tags: [iac, terraform, provisioning, infrastructure]
 
 ## Rule
 
-Cloud infrastructure **should** be defined as code with **Terraform** and applied through review,
-rather than provisioned by hand in a console. Manual, un-tracked infrastructure changes are
-discouraged.
+Cloud infrastructure **must** be defined as code with **Terraform** and applied through review, not
+provisioned by hand in a console. Infrastructure-as-code in another tool is not the standard, and
+manual, un-tracked infrastructure changes are not permitted as the way infrastructure is managed.
 
 ## Rationale
 
@@ -27,6 +27,7 @@ scope.
 
 ## Exceptions
 
-Advisory (Handbook): break-glass manual changes during an incident are acceptable, but should be
-reconciled back into Terraform afterward. *Placement note:* this rule may move to Delivery & CI/CD
-when that domain is authored.
+The gate blocks on the detectable part — committed IaC must be Terraform, not another tool. The "no
+manual console changes" part can't be detected from the repo, so it stands as required practice backed
+by review rather than a mechanical check. Break-glass manual changes during an incident are acceptable
+but must be reconciled back into Terraform afterward; broader deviations use the Phase-2 exception path.

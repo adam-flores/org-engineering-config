@@ -3,9 +3,9 @@
 The neutral source of truth: one markdown file per rule, classified by `domain × severity`. Format is
 defined in [`../docs/GUIDANCE-SCHEMA.md`](../docs/GUIDANCE-SCHEMA.md).
 
-> **Stage 2 — authoring real guidance, domain by domain.** Architecture & Tech Stack and Security &
-> Compliance now hold real rules. The remaining domains still carry a single illustrative sample each
-> (marked below) until we author them.
+> **Stage 2 — authoring real guidance, domain by domain.** Architecture & Tech Stack, Security &
+> Compliance, and Delivery & CI/CD now hold real rules. The remaining domains still carry a single
+> illustrative sample each (marked below) until we author them.
 
 ## Architecture & Tech Stack
 
@@ -21,7 +21,7 @@ defined in [`../docs/GUIDANCE-SCHEMA.md`](../docs/GUIDANCE-SCHEMA.md).
 | [`arch-diagrams-in-repo`](architecture-tech-stack/diagrams-in-repo.md) | Keep architecture diagrams in the codebase | Handbook |
 | [`arch-adrs`](architecture-tech-stack/adrs.md) | Record significant decisions as ADRs | Handbook |
 | [`arch-service-boundaries`](architecture-tech-stack/service-boundaries.md) | Cross boundaries through APIs, not shared databases | Handbook |
-| [`arch-infrastructure-as-code`](architecture-tech-stack/infrastructure-as-code.md) | Provision infrastructure as code with Terraform | Handbook |
+| [`arch-infrastructure-as-code`](architecture-tech-stack/infrastructure-as-code.md) | Provision infrastructure as code with Terraform | **Strategic** |
 
 ## Security & Compliance
 
@@ -32,11 +32,24 @@ defined in [`../docs/GUIDANCE-SCHEMA.md`](../docs/GUIDANCE-SCHEMA.md).
 | [`sec-approved-package-sources`](security-compliance/approved-package-sources.md) | Install packages only from approved, reputable registries | **Strategic** |
 | [`sec-local-vulnerability-scanning`](security-compliance/local-vulnerability-scanning.md) | Scan for vulnerabilities locally before pushing | Handbook |
 
+## Delivery & CI/CD
+
+| id | Title | Severity |
+|---|---|---|
+| [`cicd-required-checks-before-merge`](delivery-ci-cd/required-checks-before-merge.md) | Gate every merge on required CI checks | **Strategic** |
+| [`cicd-required-peer-review`](delivery-ci-cd/required-peer-review.md) | Require an approving peer review before merge | **Strategic** |
+| [`cicd-github-flow-branching`](delivery-ci-cd/github-flow-branching.md) | Follow GitHub Flow for branching | **Strategic** |
+| [`cicd-semver-release-tags`](delivery-ci-cd/semver-release-tags.md) | Tag releases with a semantic version | **Strategic** |
+| [`cicd-deploy-via-pipeline`](delivery-ci-cd/deploy-via-pipeline.md) | Deploy through the pipeline, not by hand | **Strategic** |
+| [`cicd-decompose-work`](delivery-ci-cd/decompose-work.md) | Decompose work into small, independently branched pieces | Handbook |
+| [`cicd-small-changesets`](delivery-ci-cd/small-changesets.md) | Prefer small commits and pull requests | Handbook |
+| [`cicd-safe-rollback`](delivery-ci-cd/safe-rollback.md) | Every release must have a safe rollback path | Handbook |
+| [`cicd-delete-merged-branches`](delivery-ci-cd/delete-merged-branches.md) | Delete branches after they merge | Handbook |
+
 ## Other domains (illustrative sample — not yet authored)
 
 | id | Title | Domain | Severity |
 |---|---|---|---|
-| [`cicd-required-checks-before-merge`](delivery-ci-cd/required-checks-before-merge.md) | Gate every merge on required CI checks | Delivery & CI/CD | **Strategic** |
 | [`obs-logs-to-approved-sink`](observability-data/logs-to-approved-sink.md) | Emit logs and telemetry to an approved sink | Observability & Data | **Strategic** |
 | [`qual-regression-test-for-bugfix`](quality-testing/regression-test-for-bugfix.md) | Add a regression test with every bug fix | Quality & Testing | Handbook |
 | [`integ-pin-third-party-actions`](integrations-tooling/pin-third-party-actions.md) | Pin third-party CI actions and dependencies by digest | Integrations & Tooling | Handbook |
