@@ -15,12 +15,30 @@ and the guidance catalog at [`guidance/README.md`](guidance/README.md).
 
 ## Current stage
 
-**Stage 3 — polishing the design against what authoring taught us.** Stages 1–2 are done: the design,
-the guidance-item schema, and real guidance authored across all seven domains (53 rules). Stage 3
-refines the model — the `enforcement` axis is the first change. Still **not** built: the Claude Code
-adapter and CI workflows (freshness gate, promotion, bump bot). Guidance content and the design/schema
-docs are in scope; **executable tooling (adapters, scripts, CI workflows) is not** — if a change would
-introduce it, stop and confirm the stage first.
+**Stage 3 — polishing the design against what authoring taught us.** Stages 1–2 are done (the design,
+the guidance-item schema, and real guidance across all seven domains). Stage 3's main change — the
+**`enforcement` axis** — is complete: severity now means *how authoritative* (required vs recommended),
+enforcement means *where/how it's made to stick* (`local`/`central`/`retroactive`/`none`), and a rule
+blocks only when it is required **and** `central`. Still **not** built: the Claude Code adapter and CI
+workflows (freshness gate, promotion, bump bot). Guidance content and design/schema docs are in scope;
+**executable tooling is not** — if a change would introduce it, stop and confirm the stage first.
+
+## Where we left off (2026-07-13)
+
+Current catalog: **53 rules** across 7 domains — 2 Policy · 20 Strategic · 31 Handbook; enforcement 20
+`central` · 5 `local` · 12 `retroactive` · 16 `none`. Only **19 rules actually block** (required +
+`central`). Everything is committed and pushed to `main`.
+
+Open threads to pick up next time (both flagged in the relevant rule bodies; neither urgent):
+
+- **"DO NOT USE" list needs a home** — [`integ-denylist-tools`](guidance/integrations-tooling/denylist-tools.md)
+  points at a placeholder table; decide where the canonical denylist lives.
+- **`integ-tool-telemetry-off` placement** — straddles Integrations & Tooling vs Security & Compliance
+  / data-governance; pick its final home.
+- **Optional:** a full consistency read-through of all 53 rules now that the three-axis model is settled.
+
+After Stage 3 comes the Phase-2 build work (Claude Code adapter, CI freshness gate / promotion / bump
+bot), which introduces executable tooling — confirm the stage before starting it.
 
 ## Conventions
 
