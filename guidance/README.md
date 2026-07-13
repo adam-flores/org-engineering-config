@@ -3,9 +3,10 @@
 The neutral source of truth: one markdown file per rule, classified by `domain × severity`. Format is
 defined in [`../docs/GUIDANCE-SCHEMA.md`](../docs/GUIDANCE-SCHEMA.md).
 
-> **Stage 2 — authoring real guidance, domain by domain.** Architecture & Tech Stack, Security &
-> Compliance, Delivery & CI/CD, Quality & Testing, and Observability & Data now hold real rules. The
-> remaining domains still carry a single illustrative sample each (marked below) until we author them.
+> **Stage 2 — authoring real guidance, domain by domain.** Six of seven domains now hold real rules —
+> Architecture & Tech Stack, Security & Compliance, Delivery & CI/CD, Quality & Testing, Observability
+> & Data, and Integrations & Tooling. Only Developer Environment still carries its illustrative sample
+> (marked below) until we author it.
 
 ## Architecture & Tech Stack
 
@@ -74,17 +75,24 @@ rule's Exceptions).
 | [`obs-analytics-event-schema`](observability-data/analytics-event-schema.md) | Follow an agreed schema for analytics events | Handbook |
 | [`obs-data-classification`](observability-data/data-classification.md) | Classify data and handle it by its class | Handbook |
 
+## Integrations & Tooling
+
+Package registries are governed by
+[`sec-approved-package-sources`](security-compliance/approved-package-sources.md) in Security &
+Compliance (kept there to avoid duplication).
+
+| id | Title | Severity |
+|---|---|---|
+| [`integ-denylist-tools`](integrations-tooling/denylist-tools.md) | Prohibited ("DO NOT USE") tools must not be used | **Policy** |
+| [`integ-dependency-licenses`](integrations-tooling/dependency-licenses.md) | Third-party dependencies must use allowed licenses | **Strategic** |
+| [`integ-approved-tools`](integrations-tooling/approved-tools.md) | Use the approved tool for each capability (GitHub · Claude · Mermaid · Notion · Playwright · GitHub Actions) | Handbook |
+| [`integ-ai-usage-guardrails`](integrations-tooling/ai-usage-guardrails.md) | Use only approved AI tools with company code | Handbook |
+| [`integ-tool-telemetry-off`](integrations-tooling/tool-telemetry-off.md) | Disable tool telemetry and usage tracking | Handbook |
+| [`integ-new-tool-approval`](integrations-tooling/new-tool-approval.md) | Route new tools through the approval path | Handbook |
+| [`integ-pin-third-party-actions`](integrations-tooling/pin-third-party-actions.md) | Pin third-party CI actions and dependencies by digest | Handbook |
+
 ## Other domains (illustrative sample — not yet authored)
 
 | id | Title | Domain | Severity |
 |---|---|---|---|
-| [`integ-pin-third-party-actions`](integrations-tooling/pin-third-party-actions.md) | Pin third-party CI actions and dependencies by digest | Integrations & Tooling | Handbook |
 | [`env-shared-formatter-config`](developer-environment/shared-formatter-config.md) | Use the shared formatter and linter configuration | Developer Environment | Handbook |
-
-## Parked for later domains
-
-- **Mermaid** as the diagramming tool → **Integrations & Tooling** (severity TBD).
-- **Notion** as the knowledge base → **Integrations & Tooling** (likely Handbook — can't be
-  mechanically blocked).
-- **Playwright** as the UI testing tool → **Integrations & Tooling** (referenced by
-  [`qual-ui-automated-testing`](quality-testing/ui-automated-testing.md)).
