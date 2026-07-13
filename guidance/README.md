@@ -3,10 +3,9 @@
 The neutral source of truth: one markdown file per rule, classified by `domain × severity`. Format is
 defined in [`../docs/GUIDANCE-SCHEMA.md`](../docs/GUIDANCE-SCHEMA.md).
 
-> **Stage 2 — authoring real guidance, domain by domain.** Six of seven domains now hold real rules —
-> Architecture & Tech Stack, Security & Compliance, Delivery & CI/CD, Quality & Testing, Observability
-> & Data, and Integrations & Tooling. Only Developer Environment still carries its illustrative sample
-> (marked below) until we author it.
+> **Stage 2 — real guidance authored across all seven domains.** Every domain below now holds real
+> rules (no illustrative samples remain). Next up is the Stage-3 design polish, which will fold in the
+> themes surfaced while authoring — see the notes at the end.
 
 ## Architecture & Tech Stack
 
@@ -91,8 +90,16 @@ Compliance (kept there to avoid duplication).
 | [`integ-new-tool-approval`](integrations-tooling/new-tool-approval.md) | Route new tools through the approval path | Handbook |
 | [`integ-pin-third-party-actions`](integrations-tooling/pin-third-party-actions.md) | Pin third-party CI actions and dependencies by digest | Handbook |
 
-## Other domains (illustrative sample — not yet authored)
+## Developer Environment
 
-| id | Title | Domain | Severity |
-|---|---|---|---|
-| [`env-shared-formatter-config`](developer-environment/shared-formatter-config.md) | Use the shared formatter and linter configuration | Developer Environment | Handbook |
+All Handbook — developer-side setup, not mechanically gated in the pilot.
+
+| id | Title | Severity |
+|---|---|---|
+| [`env-preferred-editors`](developer-environment/preferred-editors.md) | Prefer VS Code or the terminal as the editor | Handbook |
+| [`env-shared-formatter-config`](developer-environment/shared-formatter-config.md) | Use the shared formatter and linter configuration | Handbook |
+| [`env-reproducible-setup`](developer-environment/reproducible-setup.md) | Make local setup reproducible | Handbook |
+| [`env-pinned-tool-versions`](developer-environment/pinned-tool-versions.md) | Pin local runtime and tool versions | Handbook |
+| [`env-pre-commit-hooks`](developer-environment/pre-commit-hooks.md) | Provide standard pre-commit hooks | Handbook |
+| [`env-local-secrets-handling`](developer-environment/local-secrets-handling.md) | Handle local secrets safely | Handbook |
+| [`env-gitignore-local-settings`](developer-environment/gitignore-local-settings.md) | Don't commit local environment settings | Handbook |
