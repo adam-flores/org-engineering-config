@@ -5,9 +5,10 @@ The neutral source of truth: one markdown file per rule, classified by
 [`../docs/GUIDANCE-SCHEMA.md`](../docs/GUIDANCE-SCHEMA.md); how to propose or change a rule is in
 [`../CONTRIBUTING.md`](../CONTRIBUTING.md).
 
-**53 rules across 7 domains.** Severity: 2 Policy · 15 Strategic · 36 Handbook. Enforcement: 20
+**53 rules across 7 domains.** Severity: 2 Policy · 20 Strategic · 31 Handbook. Enforcement: 20
 `central` · 5 `local` · 12 `retroactive` · 16 `none`. **A rule blocks only when it is required
-(Policy/Strategic) *and* `central`.**
+(Policy/Strategic) *and* `central`** — so the 12 `retroactive` and 16 `none` rules include several
+*required-but-unenforceable* ones (`Strategic` + `none`/`retroactive`).
 
 ## Architecture & Tech Stack
 
@@ -62,19 +63,19 @@ The neutral source of truth: one markdown file per rule, classified by
 
 ## Observability & Data
 
-All rules here are `Handbook` severity; enforcement ranges from `retroactive` to `none` — none has a
-central gate in the pilot.
+Three rules here are required (`Strategic`) but enforced `retroactive`ly — audit, not a gate; the rest
+are `Handbook`. Nothing here has a central gate in the pilot.
 
 | id | Title | Severity | Enforcement |
 |---|---|---|---|
+| [`obs-data-classification`](observability-data/data-classification.md) | Classify data and handle it by its class | **Strategic** | `retroactive` |
+| [`obs-no-pii-in-logs`](observability-data/no-pii-in-logs.md) | Keep secrets and PII out of logs and telemetry | **Strategic** | `retroactive` |
+| [`obs-telemetry-retention`](observability-data/telemetry-retention.md) | Define retention windows for telemetry | **Strategic** | `retroactive` |
 | [`obs-analytics-event-schema`](observability-data/analytics-event-schema.md) | Follow an agreed schema for analytics events | Handbook | `none` |
 | [`obs-correlation-ids`](observability-data/correlation-ids.md) | Propagate correlation IDs across services | Handbook | `none` |
-| [`obs-data-classification`](observability-data/data-classification.md) | Classify data and handle it by its class | Handbook | `retroactive` |
 | [`obs-health-readiness-endpoints`](observability-data/health-readiness-endpoints.md) | Expose health and readiness endpoints | Handbook | `retroactive` |
 | [`obs-logs-to-approved-sink`](observability-data/logs-to-approved-sink.md) | Emit logs and telemetry to an approved sink | Handbook | `retroactive` |
-| [`obs-no-pii-in-logs`](observability-data/no-pii-in-logs.md) | Keep secrets and PII out of logs and telemetry | Handbook | `retroactive` |
 | [`obs-structured-logging`](observability-data/structured-logging.md) | Emit structured logs with consistent fields | Handbook | `retroactive` |
-| [`obs-telemetry-retention`](observability-data/telemetry-retention.md) | Define retention windows for telemetry | Handbook | `retroactive` |
 
 ## Integrations & Tooling
 
@@ -85,12 +86,12 @@ Compliance (kept there to avoid duplication).
 | id | Title | Severity | Enforcement |
 |---|---|---|---|
 | [`integ-denylist-tools`](integrations-tooling/denylist-tools.md) | Prohibited tools must not be used | **Policy** | `central` |
+| [`integ-ai-usage-guardrails`](integrations-tooling/ai-usage-guardrails.md) | Use only approved AI tools with company code | **Strategic** | `none` |
 | [`integ-dependency-licenses`](integrations-tooling/dependency-licenses.md) | Third-party dependencies must use allowed licenses | **Strategic** | `central` |
-| [`integ-ai-usage-guardrails`](integrations-tooling/ai-usage-guardrails.md) | Use only approved AI tools with company code | Handbook | `none` |
+| [`integ-tool-telemetry-off`](integrations-tooling/tool-telemetry-off.md) | Disable tool telemetry and usage tracking | **Strategic** | `none` |
 | [`integ-approved-tools`](integrations-tooling/approved-tools.md) | Use the approved tool for each capability | Handbook | `none` |
 | [`integ-new-tool-approval`](integrations-tooling/new-tool-approval.md) | Route new tools through the approval path | Handbook | `none` |
 | [`integ-pin-third-party-actions`](integrations-tooling/pin-third-party-actions.md) | Pin third-party CI actions and dependencies by digest | Handbook | `central` |
-| [`integ-tool-telemetry-off`](integrations-tooling/tool-telemetry-off.md) | Disable tool telemetry and usage tracking | Handbook | `none` |
 
 ## Developer Environment
 

@@ -2,7 +2,7 @@
 id: integ-ai-usage-guardrails
 title: Use only approved AI tools with company code
 domain: Integrations & Tooling
-severity: Handbook
+severity: Strategic
 enforcement: none
 status: active
 since: 0.1.0
@@ -11,7 +11,7 @@ tags: [ai, guardrails, data-protection, claude]
 
 ## Rule
 
-Proprietary code, secrets, and confidential or personal data **should not** be pasted into or
+Proprietary code, secrets, and confidential or personal data **must not** be pasted into or
 processed by AI tools outside the approved set — the approved AI assistant is **Claude** (see
 [`integ-approved-tools`](approved-tools.md)). Company work with AI runs through approved tooling, not
 arbitrary consumer AI services.
@@ -29,7 +29,6 @@ Any use of AI tools on company code, data, or confidential material.
 
 ## Exceptions
 
-Advisory (Handbook): this is a firm expectation but **can't be mechanically enforced** — nothing stops
-a paste into a browser — so it warns rather than blocks. It's a leading example of the
-"required-but-unenforceable" gap flagged for the Stage-3 design polish; a built-out enterprise would
-back it with a Security & Compliance Policy and endpoint controls.
+Required (Strategic) with enforcement `none` — the canonical **required-but-unenforceable** case:
+nothing stops a paste into a browser, so it rides on review and culture rather than a gate. A built-out
+enterprise would back it with a Security & Compliance Policy and endpoint controls.

@@ -2,7 +2,7 @@
 id: obs-no-pii-in-logs
 title: Keep secrets and PII out of logs and telemetry
 domain: Observability & Data
-severity: Handbook
+severity: Strategic
 enforcement: retroactive
 status: active
 since: 0.1.0
@@ -11,7 +11,7 @@ tags: [pii, secrets, logging, privacy, data-in-telemetry]
 
 ## Rule
 
-Logs, metrics, traces, and error payloads **should not** contain secrets or personal data (PII).
+Logs, metrics, traces, and error payloads **must not** contain secrets or personal data (PII).
 Redact, mask, or omit sensitive fields before they're emitted rather than relying on the sink to hide
 them.
 
@@ -29,6 +29,6 @@ All emitted telemetry across services. This is the data-in-telemetry sibling of 
 
 ## Exceptions
 
-Advisory (Handbook) **in the pilot** — warns rather than blocks, because there's no telemetry-scanning
-enforcement yet. In a built-out enterprise this is a strong candidate for a Security & Compliance
-**Policy** control, given the compliance exposure.
+Required (Strategic), enforced `retroactive`ly — a telemetry/log scan or audit catches PII after the
+fact; there's no pre-merge gate, so it doesn't block. In a built-out enterprise this is a strong
+candidate for a Security & Compliance **Policy** control, given the compliance exposure.

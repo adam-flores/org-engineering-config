@@ -2,7 +2,7 @@
 id: obs-telemetry-retention
 title: Define retention windows for telemetry
 domain: Observability & Data
-severity: Handbook
+severity: Strategic
 enforcement: retroactive
 status: active
 since: 0.1.0
@@ -11,7 +11,7 @@ tags: [retention, logging, telemetry, data-lifecycle]
 
 ## Rule
 
-Logs, metrics, and traces **should** have a defined retention window — kept long enough to debug and
+Logs, metrics, and traces **must** have a defined retention window — kept long enough to debug and
 audit, then expired — rather than being retained indefinitely or discarded ad hoc.
 
 ## Rationale
@@ -27,5 +27,5 @@ compliance concern and lives in Security & Compliance, not here.
 
 ## Exceptions
 
-Advisory (Handbook): warns rather than blocks — retention is enforced by the telemetry platform's
-configuration, which the pilot doesn't yet standardize.
+Required (Strategic), enforced `retroactive`ly — retention is governed by the telemetry platform's
+configuration and checked by audit, not a pre-merge gate.
