@@ -3,9 +3,9 @@
 The neutral source of truth: one markdown file per rule, classified by `domain × severity`. Format is
 defined in [`../docs/GUIDANCE-SCHEMA.md`](../docs/GUIDANCE-SCHEMA.md).
 
-> **Stage 2 — authoring real guidance, domain by domain.** Architecture & Tech Stack now holds real
-> rules. The remaining domains still carry a single illustrative sample each (marked below) until we
-> author them.
+> **Stage 2 — authoring real guidance, domain by domain.** Architecture & Tech Stack and Security &
+> Compliance now hold real rules. The remaining domains still carry a single illustrative sample each
+> (marked below) until we author them.
 
 ## Architecture & Tech Stack
 
@@ -23,11 +23,19 @@ defined in [`../docs/GUIDANCE-SCHEMA.md`](../docs/GUIDANCE-SCHEMA.md).
 | [`arch-service-boundaries`](architecture-tech-stack/service-boundaries.md) | Cross boundaries through APIs, not shared databases | Handbook |
 | [`arch-infrastructure-as-code`](architecture-tech-stack/infrastructure-as-code.md) | Provision infrastructure as code with Terraform | Handbook |
 
+## Security & Compliance
+
+| id | Title | Severity |
+|---|---|---|
+| [`sec-no-plaintext-secrets`](security-compliance/no-plaintext-secrets.md) | Never commit plaintext secrets to source control | **Policy** |
+| [`sec-remote-vulnerability-scanning`](security-compliance/remote-vulnerability-scanning.md) | Block merges on unresolved vulnerabilities above Low (GHAS) | **Strategic** |
+| [`sec-approved-package-sources`](security-compliance/approved-package-sources.md) | Install packages only from approved, reputable registries | **Strategic** |
+| [`sec-local-vulnerability-scanning`](security-compliance/local-vulnerability-scanning.md) | Scan for vulnerabilities locally before pushing | Handbook |
+
 ## Other domains (illustrative sample — not yet authored)
 
 | id | Title | Domain | Severity |
 |---|---|---|---|
-| [`sec-no-plaintext-secrets`](security-compliance/no-plaintext-secrets.md) | Never commit plaintext secrets to source control | Security & Compliance | **Policy** |
 | [`cicd-required-checks-before-merge`](delivery-ci-cd/required-checks-before-merge.md) | Gate every merge on required CI checks | Delivery & CI/CD | **Strategic** |
 | [`obs-logs-to-approved-sink`](observability-data/logs-to-approved-sink.md) | Emit logs and telemetry to an approved sink | Observability & Data | **Strategic** |
 | [`qual-regression-test-for-bugfix`](quality-testing/regression-test-for-bugfix.md) | Add a regression test with every bug fix | Quality & Testing | Handbook |
