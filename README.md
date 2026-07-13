@@ -58,9 +58,8 @@ organization scales any shared standard. Individuals **pull** current guidance i
 
 ## Repository contents (today)
 
-- [`CLAUDE.md`](CLAUDE.md) — how to work in this repo (project overview + conventions).
+- [`CLAUDE.md`](CLAUDE.md) — how to work in this repo (project overview, conventions, current stage).
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — how to propose or change a rule, using the classification framework.
-- [`docs/PLAN.md`](docs/PLAN.md) — the full design and staged implementation plan.
 - [`docs/GUIDANCE-SCHEMA.md`](docs/GUIDANCE-SCHEMA.md) — the neutral guidance-item format (frontmatter + body).
 - [`guidance/`](guidance/) — the guidance catalog: real rules across all seven domains ([index](guidance/README.md)).
 
