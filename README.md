@@ -14,13 +14,25 @@ organization scales any shared standard. Individuals **pull** current guidance i
    tool or model. Tool-specific packaging (Claude Code today, others later) is produced by **adapters** that
    render the neutral source into each tool's format. The AI-tool integration is a *build target*, not the core.
 
-2. **Two-axis taxonomy.** Every guidance item is classified by `domain × severity`:
+2. **Three-axis taxonomy.** Every guidance item is classified by `domain × severity × enforcement`.
+   Severity says how *authoritative* a rule is; enforcement says how it's *made to stick* — kept
+   separate so we never claim a block we can't back up.
 
-   | Severity | Meaning | Enforcement |
+   | Severity | Meaning | Required? |
    |---|---|---|
-   | **Policy** | A control, compliance, or regulatory rule | **Blocks** (hard stop) |
-   | **Strategic** | A required enterprise practice (e.g. log to an approved sink) | **Blocks** (hard stop) |
-   | **Handbook** | A recommended pattern, default, or style | **Warns / annotates** |
+   | **Policy** | An external/regulatory or compliance control | Required |
+   | **Strategic** | An internally-mandated enterprise practice | Required |
+   | **Handbook** | A recommended pattern, default, or style | Recommended |
+
+   | Enforcement | How it's made to stick |
+   |---|---|
+   | **local** | On the dev's machine (pre-commit, local scan) — bypassable |
+   | **central** | At the remote/CI gate — the only value that can hard-block |
+   | **retroactive** | Caught after the fact by audit/scan — detects, doesn't prevent |
+   | **none** | Can't be enforced; relies on review and culture |
+
+   **A rule blocks only when it is required *and* `central`.** That lets *"required but unenforceable"*
+   (`Strategic` + `none`) be stated honestly instead of demoted to `Handbook`.
 
    **Domains** (what a rule is *about*): Security & Compliance · Architecture & Tech Stack · Quality &
    Testing · Delivery & CI/CD · Observability & Data · Integrations & Tooling · Developer Environment.
@@ -38,8 +50,8 @@ organization scales any shared standard. Individuals **pull** current guidance i
 
 ## What we're asking reviewers
 
-- Does the **severity model** (Policy / Strategic / Handbook, two of three blocking) match how you'd want
-  standards enforced?
+- Does the **severity × enforcement** split hold up — is separating *"required"* from *"how it's
+  enforced"* (so `Strategic` + `none` can mean "required but unenforceable") the right model?
 - Is the **domain list** right — anything missing, over-split, or mis-named?
 - Is **pinned + CI-enforced currency** the right governance tradeoff versus always-latest or hard-pinned?
 - Is the **neutral-core + adapters** separation worth the indirection, or over-engineered for now?
@@ -47,15 +59,17 @@ organization scales any shared standard. Individuals **pull** current guidance i
 ## Repository contents (today)
 
 - [`CLAUDE.md`](CLAUDE.md) — how to work in this repo (project overview + conventions).
+- [`CONTRIBUTING.md`](CONTRIBUTING.md) — how to propose or change a rule, using the classification framework.
 - [`docs/PLAN.md`](docs/PLAN.md) — the full design and staged implementation plan.
 - [`docs/GUIDANCE-SCHEMA.md`](docs/GUIDANCE-SCHEMA.md) — the neutral guidance-item format (frontmatter + body).
-- [`guidance/`](guidance/) — the guidance catalog: seed sample items across every domain and severity.
+- [`guidance/`](guidance/) — the guidance catalog: real rules across all seven domains ([index](guidance/README.md)).
 
 ## Staged rollout
 
 - **Stage 1 — done:** the design + conventions, for peer review.
-- **Stage 2 — now:** the neutral guidance-item schema and seed sample guidance. Still to come in this
-  stage: the Claude Code adapter and the GitHub Actions (freshness gate, promotion, bump bot).
-- **Stage 3 — next:** polish the design docs in light of what building the source teaches us.
+- **Stage 2 — done:** the neutral guidance-item schema and real guidance authored across all seven domains.
+- **Stage 3 — now:** polishing the design in light of what authoring taught us — the `enforcement`
+  dimension is the first change. Still ahead: the Claude Code adapter and the GitHub Actions (freshness
+  gate, promotion, bump bot).
 - **Phase 2 — later:** the non-overridable managed-settings enforcement tier and live-fire validation
   (two prototype apps + a policy that intentionally breaks one, to prove the gate blocks in anger).

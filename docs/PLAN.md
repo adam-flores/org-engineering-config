@@ -40,21 +40,11 @@ Why: the standards outlive any tool. Keeping the source neutral means a new tool
 not a rewrite. The tradeoff is a layer of indirection — one of the explicit review questions is
 whether that's worth it this early.
 
-### 2.2 Two-axis taxonomy: `domain × severity`
+### 2.2 Three-axis taxonomy: `domain × severity × enforcement`
 
-Every guidance item is classified on two axes.
-
-**Severity** — how hard it's enforced:
-
-| Severity | Meaning | Enforcement |
-|---|---|---|
-| **Policy** | A control, compliance, or regulatory rule | **Blocks** (hard stop) |
-| **Strategic** | A required enterprise practice (e.g. log to an approved sink) | **Blocks** (hard stop) |
-| **Handbook** | A recommended pattern, default, or style | **Warns / annotates** |
-
-Two of the three severities block; Handbook is advisory. The distinction between Policy and Strategic
-is *source of authority* (external/regulatory vs internal enterprise decision), not strength — both
-hard-stop.
+Every guidance item is classified on three axes. Authoring the real guidance made clear that the
+original two-axis model overloaded severity — it conflated *"is this required"* with *"can we make it
+stick."* Those are now separate axes.
 
 **Domain** — what a rule is *about*:
 
@@ -66,8 +56,37 @@ hard-stop.
 - Integrations & Tooling
 - Developer Environment
 
-A guidance item is exactly one `(domain, severity)` pair plus its prose. Domains keep the catalog
-navigable; severity drives enforcement.
+**Severity** — how authoritative the rule is (required vs recommended):
+
+| Severity | Meaning | Required? |
+|---|---|---|
+| **Policy** | An external/regulatory or compliance control | Required |
+| **Strategic** | An internally-mandated enterprise practice | Required |
+| **Handbook** | A recommended pattern, default, or style | Recommended |
+
+The Policy/Strategic distinction is *source of authority* (external/regulatory vs internal decision),
+not strength — both are required.
+
+**Enforcement** — where/how the rule is actually made to stick:
+
+| Enforcement | Meaning |
+|---|---|
+| **local** | Enforced on the developer's machine (pre-commit, local scan). Real, but bypassable. |
+| **central** | Enforced at the remote/CI gate. The only value that can hard-block. |
+| **retroactive** | Caught after the fact — audit, periodic scan. Detects, doesn't prevent. |
+| **none** | Can't be enforced by any of the above. Relies on review and culture. |
+
+A rule may only claim `local`/`central`/`retroactive` if that enforcement genuinely exists or is
+achievable; otherwise it is honestly `none`.
+
+**What actually blocks:** a rule blocks only when it is **required *and* `central`**. This is the key
+correction. It lets us express **"required but unenforceable"** (`Strategic` + `none`) honestly —
+authoritative guidance held up by review and culture rather than a gate — instead of quietly demoting
+it to `Handbook` to avoid claiming a block that doesn't exist. Without a scorecard/IDP mechanism to
+affirm alignment, many "every service has X" rules land at `retroactive` or `none`, and the taxonomy
+now says so plainly.
+
+A guidance item is exactly one `(domain, severity, enforcement)` triple plus its prose.
 
 ### 2.3 Governance: pinned + a CI freshness gate (the lockfile pattern)
 
@@ -121,20 +140,22 @@ design commitment, not yet an enforced mechanism.
 
 ## 5. Open questions for reviewers
 
-1. **Severity model.** Does `Policy / Strategic / Handbook` (two of three blocking) match how you'd
-   want standards enforced? Is the Policy-vs-Strategic split (source of authority) meaningful, or
-   should they collapse into one "blocking" tier?
+1. **Severity × enforcement.** Does splitting *how authoritative* (severity) from *how it's enforced*
+   (enforcement) hold up — in particular, is `Strategic` + `none` ("required but unenforceable") a
+   useful state, or a smell? And is the Policy-vs-Strategic split (source of authority) still worth
+   keeping now that neither implies blocking on its own?
 2. **Domain list.** Is the seven-domain list right — anything missing, over-split, or mis-named?
 3. **Governance tradeoff.** Is *pinned + CI-enforced currency* the right call versus always-latest or
    hard-pinned?
 4. **Neutral-core + adapters.** Is the neutral-source/adapter separation worth the indirection, or
    over-engineered for where we are now?
 
-## 6. Explicitly out of scope for this Stage 2 increment
+## 6. Explicitly out of scope for the current stage
 
-- Any adapter implementation, including the Claude Code one (later Stage 2).
-- CI workflows — freshness gate, promotion, bump bot (later Stage 2).
+- Any adapter implementation, including the Claude Code one.
+- CI workflows — freshness gate, promotion, bump bot.
 - Managed-settings enforcement and the exception/sandbox path (Phase 2).
 
-Now in scope and delivered: the guidance-item schema ([`GUIDANCE-SCHEMA.md`](GUIDANCE-SCHEMA.md)) and
-seed guidance ([`../guidance/`](../guidance/)).
+Delivered so far: the guidance-item schema ([`GUIDANCE-SCHEMA.md`](GUIDANCE-SCHEMA.md)), real guidance
+across all seven domains ([`../guidance/`](../guidance/)), and the `domain × severity × enforcement`
+taxonomy with a contribution guide ([`../CONTRIBUTING.md`](../CONTRIBUTING.md)).
