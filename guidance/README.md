@@ -4,8 +4,8 @@ The neutral source of truth: one markdown file per rule, classified by `domain �
 defined in [`../docs/GUIDANCE-SCHEMA.md`](../docs/GUIDANCE-SCHEMA.md).
 
 > **Stage 2 — authoring real guidance, domain by domain.** Architecture & Tech Stack, Security &
-> Compliance, Delivery & CI/CD, and Quality & Testing now hold real rules. The remaining domains still
-> carry a single illustrative sample each (marked below) until we author them.
+> Compliance, Delivery & CI/CD, Quality & Testing, and Observability & Data now hold real rules. The
+> remaining domains still carry a single illustrative sample each (marked below) until we author them.
 
 ## Architecture & Tech Stack
 
@@ -58,11 +58,26 @@ defined in [`../docs/GUIDANCE-SCHEMA.md`](../docs/GUIDANCE-SCHEMA.md).
 | [`qual-regression-test-for-bugfix`](quality-testing/regression-test-for-bugfix.md) | Add a regression test with every bug fix | Handbook |
 | [`qual-deterministic-tests`](quality-testing/deterministic-tests.md) | Tests must be deterministic and isolated | Handbook |
 
+## Observability & Data
+
+All Handbook — for the pilot, none of these have an enforcement system to block against yet (see each
+rule's Exceptions).
+
+| id | Title | Severity |
+|---|---|---|
+| [`obs-logs-to-approved-sink`](observability-data/logs-to-approved-sink.md) | Emit logs and telemetry to an approved sink | Handbook |
+| [`obs-structured-logging`](observability-data/structured-logging.md) | Emit structured logs with consistent fields | Handbook |
+| [`obs-correlation-ids`](observability-data/correlation-ids.md) | Propagate correlation IDs across services | Handbook |
+| [`obs-health-readiness-endpoints`](observability-data/health-readiness-endpoints.md) | Expose health and readiness endpoints | Handbook |
+| [`obs-no-pii-in-logs`](observability-data/no-pii-in-logs.md) | Keep secrets and PII out of logs and telemetry | Handbook |
+| [`obs-telemetry-retention`](observability-data/telemetry-retention.md) | Define retention windows for telemetry | Handbook |
+| [`obs-analytics-event-schema`](observability-data/analytics-event-schema.md) | Follow an agreed schema for analytics events | Handbook |
+| [`obs-data-classification`](observability-data/data-classification.md) | Classify data and handle it by its class | Handbook |
+
 ## Other domains (illustrative sample — not yet authored)
 
 | id | Title | Domain | Severity |
 |---|---|---|---|
-| [`obs-logs-to-approved-sink`](observability-data/logs-to-approved-sink.md) | Emit logs and telemetry to an approved sink | Observability & Data | **Strategic** |
 | [`integ-pin-third-party-actions`](integrations-tooling/pin-third-party-actions.md) | Pin third-party CI actions and dependencies by digest | Integrations & Tooling | Handbook |
 | [`env-shared-formatter-config`](developer-environment/shared-formatter-config.md) | Use the shared formatter and linter configuration | Developer Environment | Handbook |
 

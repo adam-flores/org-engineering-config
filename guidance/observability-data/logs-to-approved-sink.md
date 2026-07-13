@@ -2,7 +2,7 @@
 id: obs-logs-to-approved-sink
 title: Emit logs and telemetry to an approved sink
 domain: Observability & Data
-severity: Strategic
+severity: Handbook
 status: active
 since: 0.1.0
 tags: [logging, telemetry, retention]
@@ -10,8 +10,8 @@ tags: [logging, telemetry, retention]
 
 ## Rule
 
-Application logs, metrics, and traces **must** be emitted to an approved central sink using the
-standard structured format. Services must not rely solely on local files or ad-hoc destinations for
+Application logs, metrics, and traces **should** be emitted to an approved central sink using the
+standard structured format, rather than relying solely on local files or ad-hoc destinations for
 operational telemetry.
 
 ## Rationale
@@ -26,5 +26,6 @@ All production and staging services. Local development output is out of scope.
 
 ## Exceptions
 
-A service that cannot reach the standard sink (e.g. an isolated environment) documents its alternative
-and its retention story with platform sign-off. Phase 2 enforces this via the exception path.
+Advisory (Handbook): warns rather than blocks. In the pilot there's no central-sink enforcement to
+gate against; this becomes a candidate for a blocking rule once an approved sink and a way to verify it
+exist. A service that cannot reach the standard sink documents its alternative and its retention story.
