@@ -1,8 +1,10 @@
 # Design & Staged Implementation Plan
 
-> **Stage 1 — design review.** This document is the full design behind
-> [`README.md`](../README.md). Nothing here is built yet; the point of this stage is to get the
-> design right before writing any tooling. Feedback on the design is what we want.
+> **Stage 2 — scaffolding the neutral source.** This document is the full design behind
+> [`README.md`](../README.md). The Stage 1 design is settled; Stage 2 makes the neutral source
+> concrete — see the guidance-item format in [`GUIDANCE-SCHEMA.md`](GUIDANCE-SCHEMA.md) and seed items
+> under [`../guidance/`](../guidance/). Adapters and CI are still ahead. Feedback on the design and the
+> emerging source format is what we want.
 
 ## 1. Problem
 
@@ -106,11 +108,13 @@ design commitment, not yet an enforced mechanism.
 
 ## 4. Staged rollout
 
-- **Stage 1 — now.** This design + working conventions ([`CLAUDE.md`](../CLAUDE.md)), for peer
-  review. **No build components.**
-- **Stage 2 — on go-ahead.** The concrete taxonomy definition (schema for a guidance item), seed
-  guidance items, the **Claude Code adapter**, and the **GitHub Actions**: freshness gate, promotion,
-  and bump bot.
+- **Stage 1 — done.** This design + working conventions ([`CLAUDE.md`](../CLAUDE.md)), for peer
+  review.
+- **Stage 2 — now.** The concrete guidance-item schema ([`GUIDANCE-SCHEMA.md`](GUIDANCE-SCHEMA.md))
+  and seed guidance items ([`../guidance/`](../guidance/)). Still ahead in this stage: the **Claude
+  Code adapter** and the **GitHub Actions** (freshness gate, promotion, bump bot).
+- **Stage 3 — next.** Polish the design docs in light of what building the source teaches us, before
+  moving on.
 - **Phase 2 — later.** The non-overridable **managed-settings** enforcement tier (plus the
   admin-granted exception path), and **live-fire validation**: two prototype apps and a policy that
   intentionally breaks one, to prove the gate blocks in anger.
@@ -126,9 +130,11 @@ design commitment, not yet an enforced mechanism.
 4. **Neutral-core + adapters.** Is the neutral-source/adapter separation worth the indirection, or
    over-engineered for where we are now?
 
-## 6. Explicitly out of scope for Stage 1
+## 6. Explicitly out of scope for this Stage 2 increment
 
-- Any adapter implementation, including the Claude Code one.
-- CI workflows (freshness gate, promotion, bump bot).
-- The metadata schema's concrete file format and seed guidance content.
+- Any adapter implementation, including the Claude Code one (later Stage 2).
+- CI workflows — freshness gate, promotion, bump bot (later Stage 2).
 - Managed-settings enforcement and the exception/sandbox path (Phase 2).
+
+Now in scope and delivered: the guidance-item schema ([`GUIDANCE-SCHEMA.md`](GUIDANCE-SCHEMA.md)) and
+seed guidance ([`../guidance/`](../guidance/)).

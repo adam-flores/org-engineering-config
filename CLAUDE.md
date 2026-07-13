@@ -14,10 +14,11 @@ design and staged implementation plan.
 
 ## Current stage
 
-**Stage 1 — design review.** This repo currently contains *only* design and working conventions.
-There are intentionally **no build components** yet (no adapters, no CI workflows, no seed guidance).
-Do not add them unless the stage has been advanced. If a change would introduce executable tooling,
-stop and confirm the stage first.
+**Stage 2 — scaffolding the neutral source.** The Stage 1 design is in place. This stage adds the
+guidance-item format ([`docs/GUIDANCE-SCHEMA.md`](docs/GUIDANCE-SCHEMA.md)) and seed sample guidance
+under [`guidance/`](guidance/). Still **not** built in this stage: adapters and CI workflows. Guidance
+items and their schema are in scope now; **executable tooling (adapters, scripts, CI workflows) is
+not** — if a change would introduce it, stop and confirm the stage first.
 
 ## Conventions
 
@@ -52,8 +53,9 @@ stop and confirm the stage first.
 
 ### What not to do
 
-- No adapters, workflows, scripts, or seed guidance in Stage 1.
-- No tool-specific assumptions leaking into the neutral design (the whole point is neutrality).
+- No adapters, workflows, or scripts yet — those are later-Stage-2 build work, not this increment.
+- No tool-specific assumptions leaking into the neutral source (the whole point is neutrality).
+  Guidance items describe *what* is required, never *which tool* enforces it.
 - No silent local overrides of org guidance in the design — org guidance is authoritative by design.
 
 ## Review focus

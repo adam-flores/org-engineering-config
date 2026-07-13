@@ -1,8 +1,8 @@
 # org-engineering-config
 
-> **Status: design review.** This repo currently contains only the design and working conventions.
-> No build components exist yet — they're intentionally staged (see below). Feedback on the design is
-> exactly what we're looking for right now.
+> **Status: Stage 2 — scaffolding the neutral source.** The design (Stage 1) is in place and now has a
+> concrete guidance-item format plus seed sample guidance. Adapters and CI workflows are still staged
+> (see below). Feedback on both the design and the emerging source format is welcome.
 
 A **tool-agnostic, versioned, contributable source of truth for engineering standards** — the way an
 organization scales any shared standard. Individuals **pull** current guidance into their projects and
@@ -48,11 +48,14 @@ organization scales any shared standard. Individuals **pull** current guidance i
 
 - [`CLAUDE.md`](CLAUDE.md) — how to work in this repo (project overview + conventions).
 - [`docs/PLAN.md`](docs/PLAN.md) — the full design and staged implementation plan.
+- [`docs/GUIDANCE-SCHEMA.md`](docs/GUIDANCE-SCHEMA.md) — the neutral guidance-item format (frontmatter + body).
+- [`guidance/`](guidance/) — the guidance catalog: seed sample items across every domain and severity.
 
 ## Staged rollout
 
-- **Stage 1 — now:** this design + conventions, for peer review. *No build components.*
-- **Stage 2 — on go-ahead:** the taxonomy definition, seed guidance, the Claude Code adapter, and the
-  GitHub Actions (freshness gate, promotion, bump bot).
+- **Stage 1 — done:** the design + conventions, for peer review.
+- **Stage 2 — now:** the neutral guidance-item schema and seed sample guidance. Still to come in this
+  stage: the Claude Code adapter and the GitHub Actions (freshness gate, promotion, bump bot).
+- **Stage 3 — next:** polish the design docs in light of what building the source teaches us.
 - **Phase 2 — later:** the non-overridable managed-settings enforcement tier and live-fire validation
   (two prototype apps + a policy that intentionally breaks one, to prove the gate blocks in anger).
