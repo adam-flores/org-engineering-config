@@ -90,6 +90,7 @@ organization scales any shared standard. Individuals **pull** current guidance i
 - [`adapters/`](adapters/) — build targets that render the neutral source into a tool's format; the
   [Claude Code adapter](adapters/claude-code/) generates a `standards-review` skill + `standards-enforcer` agent.
 - [`examples/`](examples/) — a conforming and a violating sample app, each with the rendered reviewer, to see it pass and block.
+- [`examples/demos/python-only/`](examples/demos/python-only/) — a self-contained, demoable scenario: its own two-rule guidance ("Python only, Node prohibited") renders a reviewer that **blocks** a Node app with a "rewrite it in Python" remediation task and **passes** the Python rewrite — a vivid before/after showing that swapping the guidance changes enforcement with no code change.
 
 ## Staged rollout
 
