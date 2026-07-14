@@ -3,7 +3,8 @@ id: arch-infrastructure-as-code
 title: Provision infrastructure as code with Terraform
 domain: Architecture & Tech Stack
 severity: Strategic
-enforcement: central
+enforcement_point: ci-gate
+agent_action: align
 status: active
 since: 0.1.0
 tags: [iac, terraform, provisioning, infrastructure]
@@ -25,6 +26,12 @@ tooling and expertise shared across teams.
 
 Cloud infrastructure and environment provisioning. One-off local or throwaway experiments are out of
 scope.
+
+## Enforcement
+
+**Enforcement point:** `ci-gate` — caught at a CI gate. Because it is required and centrally gated, this rule **blocks** the PR/release.
+
+**Agent action:** `align` — a coding agent should shape its output to comply — the authoritative check is elsewhere.
 
 ## Exceptions
 

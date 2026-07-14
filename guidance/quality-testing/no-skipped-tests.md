@@ -3,7 +3,8 @@ id: qual-no-skipped-tests
 title: No skipped, disabled, or focused tests merged
 domain: Quality & Testing
 severity: Strategic
-enforcement: central
+enforcement_point: ci-gate
+agent_action: enforce
 status: active
 since: 0.1.0
 tags: [testing, skip, focus, discipline]
@@ -28,6 +29,12 @@ for skips keeps them visible and temporary; banning focus markers prevents an ac
 ## Scope
 
 Test code in application and service repositories.
+
+## Enforcement
+
+**Enforcement point:** `ci-gate` — caught at a CI gate. Because it is required and centrally gated, this rule **blocks** the PR/release.
+
+**Agent action:** `enforce` — a coding agent should actively prevent and fix violations as it writes code.
 
 ## Exceptions
 

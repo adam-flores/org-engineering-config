@@ -3,7 +3,8 @@ id: cicd-semver-release-tags
 title: Tag releases with a semantic version
 domain: Delivery & CI/CD
 severity: Strategic
-enforcement: central
+enforcement_point: ci-gate
+agent_action: align
 status: active
 since: 0.1.0
 tags: [releases, versioning, semver, tags]
@@ -26,6 +27,12 @@ to.
 
 Anything cut as a release — services, libraries, and published artifacts. Ephemeral preview or CI
 build identifiers are out of scope.
+
+## Enforcement
+
+**Enforcement point:** `ci-gate` — caught at a CI gate. Because it is required and centrally gated, this rule **blocks** the PR/release.
+
+**Agent action:** `align` — a coding agent should shape its output to comply — the authoritative check is elsewhere.
 
 ## Exceptions
 

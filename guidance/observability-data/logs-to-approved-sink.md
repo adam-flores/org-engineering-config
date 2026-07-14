@@ -3,7 +3,8 @@ id: obs-logs-to-approved-sink
 title: Emit logs and telemetry to an approved sink
 domain: Observability & Data
 severity: Handbook
-enforcement: retroactive
+enforcement_point: audit
+agent_action: align
 status: active
 since: 0.1.0
 tags: [logging, telemetry, retention]
@@ -24,6 +25,12 @@ outage and uncontrolled for compliance.
 ## Scope
 
 All production and staging services. Local development output is out of scope.
+
+## Enforcement
+
+**Enforcement point:** `audit` — caught at a retroactive audit or periodic scan, after the fact. Advisory — surfaced by review or local tooling, not gated.
+
+**Agent action:** `align` — a coding agent should shape its output to comply — the authoritative check is elsewhere.
 
 ## Exceptions
 

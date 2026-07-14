@@ -3,7 +3,8 @@ id: cicd-small-changesets
 title: Prefer small commits and pull requests
 domain: Delivery & CI/CD
 severity: Handbook
-enforcement: central
+enforcement_point: ci-gate
+agent_action: align
 status: active
 since: 0.1.0
 tags: [commits, pull-requests, review, size]
@@ -28,6 +29,12 @@ revert when something breaks.
 
 Application and service changes. Bulk mechanical changes (generated code, a formatter sweep, a
 dependency bump) that are large but low-risk are out of scope — call them out as such in the PR.
+
+## Enforcement
+
+**Enforcement point:** `ci-gate` — caught at a CI gate. It runs in CI but only **warns** — Handbook rules never block.
+
+**Agent action:** `align` — a coding agent should shape its output to comply — the authoritative check is elsewhere.
 
 ## Exceptions
 

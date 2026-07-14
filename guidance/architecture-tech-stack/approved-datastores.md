@@ -3,7 +3,8 @@ id: arch-approved-datastores
 title: Prefer Postgres, file/document storage, or no database
 domain: Architecture & Tech Stack
 severity: Handbook
-enforcement: none
+enforcement_point: human-review
+agent_action: align
 status: active
 since: 0.1.0
 tags: [database, postgres, storage, persistence]
@@ -30,6 +31,12 @@ need.
 New services and features that need persistence. Existing datastores are out of scope until migration.
 This rule expresses *preference*; the hard prohibition on local/embedded SQL engines lives in
 [`arch-no-local-sql-databases`](no-local-sql-databases.md).
+
+## Enforcement
+
+**Enforcement point:** `human-review` — caught at human review at PR time (no mechanical gate). Advisory — surfaced by review or local tooling, not gated.
+
+**Agent action:** `align` — a coding agent should shape its output to comply — the authoritative check is elsewhere.
 
 ## Exceptions
 

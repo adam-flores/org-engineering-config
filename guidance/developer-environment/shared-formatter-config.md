@@ -3,7 +3,8 @@ id: env-shared-formatter-config
 title: Use the shared formatter and linter configuration
 domain: Developer Environment
 severity: Handbook
-enforcement: local
+enforcement_point: pre-commit
+agent_action: enforce
 status: active
 since: 0.1.0
 tags: [formatting, linting, consistency]
@@ -24,6 +25,12 @@ lets engineers move between repos without relearning conventions. The value is i
 
 Application and library repositories. Generated code and vendored third-party code are excluded from
 formatting.
+
+## Enforcement
+
+**Enforcement point:** `pre-commit` — caught at a pre-commit hook or local scan (real, but bypassable). Advisory — surfaced by review or local tooling, not gated.
+
+**Agent action:** `enforce` — a coding agent should actively prevent and fix violations as it writes code.
 
 ## Exceptions
 

@@ -3,7 +3,8 @@ id: arch-approved-compute-platform
 title: Prefer AWS and serverless; containerize with Docker when needed
 domain: Architecture & Tech Stack
 severity: Handbook
-enforcement: none
+enforcement_point: human-review
+agent_action: align
 status: active
 since: 0.1.0
 tags: [aws, serverless, containers, docker, hosting]
@@ -26,6 +27,12 @@ hosting story.
 
 New services and workloads. Existing workloads on other platforms are out of scope until a major
 migration or rewrite.
+
+## Enforcement
+
+**Enforcement point:** `human-review` — caught at human review at PR time (no mechanical gate). Advisory — surfaced by review or local tooling, not gated.
+
+**Agent action:** `align` — a coding agent should shape its output to comply — the authoritative check is elsewhere.
 
 ## Exceptions
 

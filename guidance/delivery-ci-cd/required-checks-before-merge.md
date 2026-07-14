@@ -3,7 +3,8 @@ id: cicd-required-checks-before-merge
 title: Gate every merge on required CI checks
 domain: Delivery & CI/CD
 severity: Strategic
-enforcement: central
+enforcement_point: ci-gate
+agent_action: aware
 status: active
 since: 0.1.0
 tags: [ci, branch-protection, merge]
@@ -24,6 +25,12 @@ standard degrades to a suggestion. This is the mechanism the whole governance mo
 
 All protected branches (default branch and release branches). Personal or throwaway branches without
 protection are out of scope until they target a protected branch.
+
+## Enforcement
+
+**Enforcement point:** `ci-gate` — caught at a CI gate. Because it is required and centrally gated, this rule **blocks** the PR/release.
+
+**Agent action:** `aware` — a coding agent cannot self-satisfy this rule; it should surface it and never undermine it.
 
 ## Exceptions
 

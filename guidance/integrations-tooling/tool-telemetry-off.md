@@ -3,7 +3,8 @@ id: integ-tool-telemetry-off
 title: Disable tool telemetry and usage tracking
 domain: Integrations & Tooling
 severity: Strategic
-enforcement: none
+enforcement_point: human-review
+agent_action: enforce
 status: active
 since: 0.1.0
 tags: [telemetry, privacy, tooling, configuration]
@@ -25,6 +26,12 @@ organization that hasn't chosen to be monitored.
 
 Tools the organization adopts and configures — editors, CLIs, CI tooling, SDKs. Where a tool offers no
 way to disable telemetry, note it so the trade-off is a visible decision.
+
+## Enforcement
+
+**Enforcement point:** `human-review` — caught at human review at PR time (no mechanical gate). It is **required but unenforceable** at a gate — held by review and culture, not a hard block.
+
+**Agent action:** `enforce` — a coding agent should actively prevent and fix violations as it writes code.
 
 ## Exceptions
 

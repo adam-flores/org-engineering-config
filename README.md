@@ -1,8 +1,10 @@
 # org-engineering-config
 
-> **Status: Stage 2 — scaffolding the neutral source.** The design (Stage 1) is in place and now has a
-> concrete guidance-item format plus seed sample guidance. Adapters and CI workflows are still staged
-> (see below). Feedback on both the design and the emerging source format is welcome.
+> **Status: Stage 3 — polishing the design in light of what authoring taught us.** The design
+> (Stage 1) and the neutral guidance-item schema with real guidance across all seven domains
+> (Stage 2) are in place. Stage 3's headline change — splitting enforcement into *where a violation
+> is caught* and *what a coding agent should do about it* — has landed. Adapters and CI workflows are
+> still ahead (see below). Feedback on both the design and the source format is welcome.
 
 A **tool-agnostic, versioned, contributable source of truth for engineering standards** — the way an
 organization scales any shared standard. Individuals **pull** current guidance into their projects and
@@ -14,9 +16,11 @@ organization scales any shared standard. Individuals **pull** current guidance i
    tool or model. Tool-specific packaging (Claude Code today, others later) is produced by **adapters** that
    render the neutral source into each tool's format. The AI-tool integration is a *build target*, not the core.
 
-2. **Three-axis taxonomy.** Every guidance item is classified by `domain × severity × enforcement`.
-   Severity says how *authoritative* a rule is; enforcement says how it's *made to stick* — kept
-   separate so we never claim a block we can't back up.
+2. **Four-axis taxonomy.** Every guidance item is classified by
+   `domain × severity × enforcement_point × agent_action`. Severity says how *authoritative* a rule
+   is; enforcement_point says *where a violation is caught*; agent_action tells an AI coding agent its
+   *own role*. Keeping them separate means we never claim a block we can't back up, and an agent
+   always knows whether it is the line of defense or merely aligning to a gate elsewhere.
 
    | Severity | Meaning | Required? |
    |---|---|---|
@@ -24,15 +28,27 @@ organization scales any shared standard. Individuals **pull** current guidance i
    | **Strategic** | An internally-mandated enterprise practice | Required |
    | **Handbook** | A recommended pattern, default, or style | Recommended |
 
-   | Enforcement | How it's made to stick |
+   | Enforcement point | Where a violation is caught |
    |---|---|
-   | **local** | On the dev's machine (pre-commit, local scan) — bypassable |
-   | **central** | At the remote/CI gate — the only value that can hard-block |
-   | **retroactive** | Caught after the fact by audit/scan — detects, doesn't prevent |
-   | **none** | Can't be enforced; relies on review and culture |
+   | **coding-agent** | The AI agent as it writes — real, but not a hard gate |
+   | **pre-commit** | A dev-machine hook/scan — bypassable |
+   | **ci-gate** | A remote/CI gate — one of the two points that can hard-block |
+   | **managed-platform** | Org-managed, non-overridable settings — also hard-blocks |
+   | **human-review** | A human reviewer at PR time — detects, doesn't mechanically gate |
+   | **audit** | A retroactive/periodic scan — catches after the fact |
+   | **none** | Nothing mechanical; relies on culture |
 
-   **A rule blocks only when it is required *and* `central`.** That lets *"required but unenforceable"*
-   (`Strategic` + `none`) be stated honestly instead of demoted to `Handbook`.
+   | Agent action | What a coding agent does |
+   |---|---|
+   | **enforce** | Actively prevent and fix violations as it writes code |
+   | **align** | Shape its output to comply — the authoritative check is elsewhere |
+   | **aware** | It can't self-satisfy the rule; surface it and never undermine it |
+
+   **A rule blocks only when it is required *and* its `enforcement_point` is `ci-gate` or
+   `managed-platform`.** That lets *"required but unenforceable"* (`Strategic` + `human-review`/`audit`)
+   be stated honestly instead of demoted to `Handbook`. `Policy` rules additionally carry a
+   `references` list mapping them to the external control they enforce (e.g. `SOC2 CC6.1`,
+   `ISO 27001 A.9.2.3`) for full traceability.
 
    **Domains** (what a rule is *about*): Security & Compliance · Architecture & Tech Stack · Quality &
    Testing · Delivery & CI/CD · Observability & Data · Integrations & Tooling · Developer Environment.
@@ -50,8 +66,9 @@ organization scales any shared standard. Individuals **pull** current guidance i
 
 ## What we're asking reviewers
 
-- Does the **severity × enforcement** split hold up — is separating *"required"* from *"how it's
-  enforced"* (so `Strategic` + `none` can mean "required but unenforceable") the right model?
+- Does the **severity × enforcement_point × agent_action** split hold up — is separating *"required"*
+  from *"where it's caught"* from *"what the coding agent does"* the right decomposition (so
+  `Strategic` + `human-review` can mean "required but unenforceable")?
 - Is the **domain list** right — anything missing, over-split, or mis-named?
 - Is **pinned + CI-enforced currency** the right governance tradeoff versus always-latest or hard-pinned?
 - Is the **neutral-core + adapters** separation worth the indirection, or over-engineered for now?
@@ -59,16 +76,21 @@ organization scales any shared standard. Individuals **pull** current guidance i
 ## Repository contents (today)
 
 - [`CLAUDE.md`](CLAUDE.md) — how to work in this repo (project overview, conventions, current stage).
+- [`docs/HOW-TO-USE.md`](docs/HOW-TO-USE.md) — adopt this in an org: setup, worked samples, and a "how I know it's working" self-check.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — how to propose or change a rule, using the classification framework.
 - [`docs/GUIDANCE-SCHEMA.md`](docs/GUIDANCE-SCHEMA.md) — the neutral guidance-item format (frontmatter + body).
 - [`guidance/`](guidance/) — the guidance catalog: real rules across all seven domains ([index](guidance/README.md)).
+- [`adapters/`](adapters/) — build targets that render the neutral source into a tool's format; the
+  [Claude Code adapter](adapters/claude-code/) generates a `standards-review` skill + `standards-enforcer` agent.
 
 ## Staged rollout
 
 - **Stage 1 — done:** the design + conventions, for peer review.
 - **Stage 2 — done:** the neutral guidance-item schema and real guidance authored across all seven domains.
-- **Stage 3 — now:** polishing the design in light of what authoring taught us — the `enforcement`
-  dimension is the first change. Still ahead: the Claude Code adapter and the GitHub Actions (freshness
-  gate, promotion, bump bot).
-- **Phase 2 — later:** the non-overridable managed-settings enforcement tier and live-fire validation
-  (two prototype apps + a policy that intentionally breaks one, to prove the gate blocks in anger).
+- **Stage 3 — done:** enforcement split into `enforcement_point` (where a violation is caught) and
+  `agent_action` (what a coding agent does), with control `references` on `Policy` rules.
+- **Phase 2 (build) — in progress:** the [Claude Code adapter](adapters/claude-code/) renders the
+  neutral source into a `standards-review` skill and `standards-enforcer` agent. Next: two sample apps
+  + a test matrix, an adoption guide, then the GitHub Actions (freshness gate, promotion, bump bot).
+- **Phase 2 (enforcement) — later:** the non-overridable managed-settings tier and live-fire
+  validation (a policy that intentionally breaks one app, to prove the gate blocks in anger).

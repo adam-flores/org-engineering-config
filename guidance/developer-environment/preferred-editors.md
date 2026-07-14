@@ -3,7 +3,8 @@ id: env-preferred-editors
 title: Prefer VS Code or the terminal as the editor
 domain: Developer Environment
 severity: Handbook
-enforcement: none
+enforcement_point: none
+agent_action: aware
 status: active
 since: 0.1.0
 tags: [editor, ide, vscode, terminal]
@@ -26,6 +27,12 @@ expect shared config to target these.
 
 Day-to-day application and service development. Specialized work with its own tooling needs is out of
 scope.
+
+## Enforcement
+
+**Enforcement point:** `none` — caught at nothing mechanical — it rides on review and culture. Advisory — surfaced by review or local tooling, not gated.
+
+**Agent action:** `aware` — a coding agent cannot self-satisfy this rule; it should surface it and never undermine it.
 
 ## Exceptions
 

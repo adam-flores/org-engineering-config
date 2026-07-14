@@ -3,7 +3,8 @@ id: qual-ui-automated-testing
 title: UI development must have automated tests
 domain: Quality & Testing
 severity: Strategic
-enforcement: central
+enforcement_point: ci-gate
+agent_action: enforce
 status: active
 since: 0.1.0
 tags: [testing, ui, e2e, playwright, automation]
@@ -25,6 +26,12 @@ click-through. Standardizing on one tool keeps the suites consistent and shareab
 
 Applications and services with a user interface. Purely headless services with no UI are out of scope
 (their behavior is covered by unit and integration tests).
+
+## Enforcement
+
+**Enforcement point:** `ci-gate` — caught at a CI gate. Because it is required and centrally gated, this rule **blocks** the PR/release.
+
+**Agent action:** `enforce` — a coding agent should actively prevent and fix violations as it writes code.
 
 ## Exceptions
 

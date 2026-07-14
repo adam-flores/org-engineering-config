@@ -3,7 +3,8 @@ id: sec-approved-package-sources
 title: Install packages only from approved, reputable registries
 domain: Security & Compliance
 severity: Strategic
-enforcement: central
+enforcement_point: ci-gate
+agent_action: enforce
 status: active
 since: 0.1.0
 tags: [security, supply-chain, dependencies, registries, packages]
@@ -31,6 +32,12 @@ in the approved internal registry, not wired in from a personal repository.
 Dependency declarations and lockfiles across all repositories. Detectable by scanning the resolved
 source of each dependency in the lockfile/manifest. Vendored code with a recorded, reviewed origin is
 out of scope.
+
+## Enforcement
+
+**Enforcement point:** `ci-gate` — caught at a CI gate. Because it is required and centrally gated, this rule **blocks** the PR/release.
+
+**Agent action:** `enforce` — a coding agent should actively prevent and fix violations as it writes code.
 
 ## Exceptions
 

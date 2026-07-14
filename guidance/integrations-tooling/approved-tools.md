@@ -3,7 +3,8 @@ id: integ-approved-tools
 title: Use the approved tool for each capability
 domain: Integrations & Tooling
 severity: Handbook
-enforcement: none
+enforcement_point: human-review
+agent_action: align
 status: active
 since: 0.1.0
 tags: [tooling, registry, approved-tools, github, claude, mermaid, notion, playwright]
@@ -36,6 +37,12 @@ delivery gates assume, Playwright is what the UI-testing rule means, and so on.
 ## Scope
 
 Tool selection for new work. Existing tools are out of scope until a migration.
+
+## Enforcement
+
+**Enforcement point:** `human-review` — caught at human review at PR time (no mechanical gate). Advisory — surfaced by review or local tooling, not gated.
+
+**Agent action:** `align` — a coding agent should shape its output to comply — the authoritative check is elsewhere.
 
 ## Exceptions
 

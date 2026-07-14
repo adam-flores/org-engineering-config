@@ -3,7 +3,8 @@ id: arch-no-local-sql-databases
 title: No SQLite or local/embedded SQL databases
 domain: Architecture & Tech Stack
 severity: Strategic
-enforcement: central
+enforcement_point: ci-gate
+agent_action: enforce
 status: active
 since: 0.1.0
 tags: [database, sqlite, persistence, prohibition]
@@ -25,6 +26,12 @@ recoverable, auditable, and operable.
 
 Application data persistence in services and shared tooling. Purely local, disposable use with no
 application data — for example a test fixture or a build cache — is out of scope.
+
+## Enforcement
+
+**Enforcement point:** `ci-gate` — caught at a CI gate. Because it is required and centrally gated, this rule **blocks** the PR/release.
+
+**Agent action:** `enforce` — a coding agent should actively prevent and fix violations as it writes code.
 
 ## Exceptions
 

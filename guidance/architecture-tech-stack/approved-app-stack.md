@@ -3,7 +3,8 @@ id: arch-approved-app-stack
 title: Build on approved frontend and API stacks
 domain: Architecture & Tech Stack
 severity: Handbook
-enforcement: none
+enforcement_point: human-review
+agent_action: align
 status: active
 since: 0.1.0
 tags: [frontend, backend, languages, frameworks, tech-stack]
@@ -29,6 +30,12 @@ each time.
 
 New applications and services. Existing systems on other stacks are out of scope until a major
 rewrite. Language choices inside isolated tooling or scripts are not constrained here.
+
+## Enforcement
+
+**Enforcement point:** `human-review` — caught at human review at PR time (no mechanical gate). Advisory — surfaced by review or local tooling, not gated.
+
+**Agent action:** `align` — a coding agent should shape its output to comply — the authoritative check is elsewhere.
 
 ## Exceptions
 

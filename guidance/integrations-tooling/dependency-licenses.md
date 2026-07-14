@@ -3,7 +3,8 @@ id: integ-dependency-licenses
 title: Third-party dependencies must use allowed licenses
 domain: Integrations & Tooling
 severity: Strategic
-enforcement: central
+enforcement_point: ci-gate
+agent_action: align
 status: active
 since: 0.1.0
 tags: [licensing, dependencies, supply-chain, compliance]
@@ -25,6 +26,12 @@ legal risk out of the product instead of discovering it in an audit.
 
 Third-party runtime and distributed dependencies. Dev-only tooling that isn't distributed is lower-risk
 and may be scoped out.
+
+## Enforcement
+
+**Enforcement point:** `ci-gate` — caught at a CI gate. Because it is required and centrally gated, this rule **blocks** the PR/release.
+
+**Agent action:** `align` — a coding agent should shape its output to comply — the authoritative check is elsewhere.
 
 ## Exceptions
 

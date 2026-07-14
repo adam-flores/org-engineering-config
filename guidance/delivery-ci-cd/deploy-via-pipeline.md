@@ -3,7 +3,8 @@ id: cicd-deploy-via-pipeline
 title: Deploy through the pipeline, not by hand
 domain: Delivery & CI/CD
 severity: Strategic
-enforcement: central
+enforcement_point: ci-gate
+agent_action: align
 status: active
 since: 0.1.0
 tags: [deployment, pipeline, environments, promotion, approvals]
@@ -25,6 +26,12 @@ gate keeps a human decision on the highest-risk step.
 ## Scope
 
 Deployable services and applications. Local runs and developer sandboxes are out of scope.
+
+## Enforcement
+
+**Enforcement point:** `ci-gate` — caught at a CI gate. Because it is required and centrally gated, this rule **blocks** the PR/release.
+
+**Agent action:** `align` — a coding agent should shape its output to comply — the authoritative check is elsewhere.
 
 ## Exceptions
 

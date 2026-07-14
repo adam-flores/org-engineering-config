@@ -3,7 +3,8 @@ id: cicd-required-peer-review
 title: Require an approving peer review before merge
 domain: Delivery & CI/CD
 severity: Strategic
-enforcement: central
+enforcement_point: ci-gate
+agent_action: aware
 status: active
 since: 0.1.0
 tags: [code-review, pull-requests, branch-protection]
@@ -26,6 +27,12 @@ proves someone else looked.
 
 Pull requests targeting protected branches. Repositories with a single maintainer may configure the
 minimum the platform allows, documented as such.
+
+## Enforcement
+
+**Enforcement point:** `ci-gate` — caught at a CI gate. Because it is required and centrally gated, this rule **blocks** the PR/release.
+
+**Agent action:** `aware` — a coding agent cannot self-satisfy this rule; it should surface it and never undermine it.
 
 ## Exceptions
 

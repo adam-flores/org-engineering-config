@@ -3,7 +3,8 @@ id: cicd-github-flow-branching
 title: Follow GitHub Flow for branching
 domain: Delivery & CI/CD
 severity: Strategic
-enforcement: central
+enforcement_point: ci-gate
+agent_action: align
 status: active
 since: 0.1.0
 tags: [branching, github-flow, workflow]
@@ -25,6 +26,12 @@ the rest of the delivery gates assume.
 
 Application and service repositories. A repository with a genuinely different release model (e.g. a
 versioned library maintaining multiple release lines) may deviate with that model documented.
+
+## Enforcement
+
+**Enforcement point:** `ci-gate` — caught at a CI gate. Because it is required and centrally gated, this rule **blocks** the PR/release.
+
+**Agent action:** `align` — a coding agent should shape its output to comply — the authoritative check is elsewhere.
 
 ## Exceptions
 

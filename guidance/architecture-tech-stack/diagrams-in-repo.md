@@ -3,7 +3,8 @@ id: arch-diagrams-in-repo
 title: Keep architecture diagrams in the codebase
 domain: Architecture & Tech Stack
 severity: Handbook
-enforcement: retroactive
+enforcement_point: audit
+agent_action: align
 status: active
 since: 0.1.0
 tags: [documentation, diagrams, architecture]
@@ -25,6 +26,12 @@ instead of drifting on a separate wiki. Keeping the three views together gives a
 
 Services and significant components. Trivial scripts and libraries with no meaningful architecture are
 out of scope.
+
+## Enforcement
+
+**Enforcement point:** `audit` — caught at a retroactive audit or periodic scan, after the fact. Advisory — surfaced by review or local tooling, not gated.
+
+**Agent action:** `align` — a coding agent should shape its output to comply — the authoritative check is elsewhere.
 
 ## Exceptions
 

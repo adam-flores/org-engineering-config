@@ -3,7 +3,8 @@ id: integ-pin-third-party-actions
 title: Pin third-party CI actions and dependencies by digest
 domain: Integrations & Tooling
 severity: Handbook
-enforcement: central
+enforcement_point: ci-gate
+agent_action: enforce
 status: active
 since: 0.1.0
 tags: [supply-chain, pinning, ci]
@@ -24,6 +25,12 @@ change.
 
 CI workflow definitions and build tooling. Runtime application dependencies are governed by each
 project's lockfile and are out of scope here.
+
+## Enforcement
+
+**Enforcement point:** `ci-gate` — caught at a CI gate. It runs in CI but only **warns** — Handbook rules never block.
+
+**Agent action:** `enforce` — a coding agent should actively prevent and fix violations as it writes code.
 
 ## Exceptions
 
