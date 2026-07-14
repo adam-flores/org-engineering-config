@@ -110,6 +110,7 @@ reviewer succeed and fail on purpose.
   | skipped test (`test/server.test.mjs`) | `qual-no-skipped-tests` (Strategic · ci-gate) | **BLOCK** |
   | unpinned CI action (`ci.yml`) | `integ-pin-third-party-actions` (Handbook · ci-gate) | **WARN** |
   | PII in a log (`src/server.mjs`) | `obs-no-pii-in-logs` (Strategic · audit) | required, unenforceable — surfaced, not blocked |
+  | unclassified personal data (`src/server.mjs`) | `obs-data-classification` (Strategic · audit · **aware**) | required, unenforceable — **raise to the human** in the remediation plan |
 
 **Your self-check on a real repo:** render the reviewer into a clean project → expect `PASS`. Then
 plant one obvious violation (commit a fake `API_KEY = "..."`), re-run → expect a **BLOCK** finding that
