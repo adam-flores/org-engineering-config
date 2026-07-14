@@ -15,6 +15,12 @@ import { homedir } from 'node:os';
 const HERE = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(HERE, '..', '..');
 
+// Static templates for the reviewer skill + agent. These are the canonical, hand-editable source;
+// the adapter copies them verbatim and only *generates* the compiled rules.md catalog.
+const TEMPLATES = join(HERE, 'templates');
+const SKILL_TEMPLATE = join(TEMPLATES, 'skills', 'standards-review', 'SKILL.md');
+const AGENT_TEMPLATE = join(TEMPLATES, 'agents', 'standards-enforcer.md');
+
 // ---- taxonomy (mirrors docs/GUIDANCE-SCHEMA.md) ----
 const DOMAIN_BY_SLUG = {
   'security-compliance': 'Security & Compliance',
@@ -134,87 +140,16 @@ function renderRulesCatalog(rules) {
   return L.join('\n');
 }
 
-const REVIEW_PROTOCOL = [
-  'The compiled rule catalog is at `.claude/skills/standards-review/rules.md`. Read it first.',
-  '',
-  '### How to review',
-  '',
-  '1. **Scope.** Default to the current change: `git diff` plus staged (`git diff --cached`) and untracked files. If there is no diff, or the user asks, review the whole repository. State the scope you chose.',
-  '2. **Gather evidence** with Read/Grep/Glob (and read-only Bash like `git diff`). Do not guess — cite `file:line`.',
-  '3. **Check each rule** in the catalog against the code in scope.',
-  '4. **Classify every finding** using the catalog:',
-  '   - **BLOCK** — a violated rule tagged BLOCK (required **and** `ci-gate`/`managed-platform`). Must be fixed before merge.',
-  '   - **WARN** — a violated Handbook or non-blocking rule. Fixing is recommended.',
-  '   - **REQUIRED-unenforceable** — a violated required rule with no gate; surface it firmly, but it does not hard-block.',
-  '5. **Use `agent_action` to know your role:**',
-  '   - `enforce` — you should prevent/fix this as you write code; if violated, fix it now.',
-  '   - `align` — make the code comply; the authoritative gate is elsewhere.',
-  '   - `aware` — you cannot self-satisfy it (e.g. peer review, an audit); note it for humans, never claim it passes.',
-  '6. **For `Policy` violations, cite the `references`** (control IDs) so the finding is traceable.',
-  '',
-  '### Report format',
-  '',
-  'Group findings: **BLOCK** first, then **WARN**, then **notes** (align/aware). For each finding give:',
-  'rule `id`, title, `file:line`, what is wrong, and how to fix it. End with a one-line verdict:',
-  '`PASS` (no BLOCK findings) or `BLOCKED — n blocking violation(s)`.',
-].join('\n');
-
-function renderSkill() {
-  const fm = [
-    '---',
-    'name: standards-review',
-    'description: Review the working tree or current diff against the organization\'s engineering standards. Reports blocking violations (required + centrally gated), warnings, and alignment/awareness notes, grouped and traceable. Use when asked to check code against org standards, before opening a PR, or to audit a repo for compliance.',
-    'user-invocable: true',
-    'allowed-tools:',
-    '  - Read',
-    '  - Grep',
-    '  - Glob',
-    '  - Bash(git diff*)',
-    '  - Bash(git status*)',
-    '---',
-    '',
-  ].join('\n');
-  const body = [
-    '# standards-review',
-    '',
-    'Review code against the organization\'s engineering standards — the neutral guidance source, compiled into this skill.',
-    '',
-    REVIEW_PROTOCOL,
-    '',
-    '---',
-    '',
-    'For a deeper, multi-file audit you can hand off to the `standards-enforcer` subagent, which follows the same protocol.',
-    '',
-  ].join('\n');
-  return fm + body;
-}
-
-function renderAgent() {
-  const fm = [
-    '---',
-    'name: standards-enforcer',
-    'description: Use this agent to audit a codebase or a diff against the organization\'s engineering standards and report violations grouped by severity and enforcement. Trigger it for pre-PR compliance checks or a deep standards audit of a repo.',
-    'tools: ["Read", "Grep", "Glob", "Bash"]',
-    'model: inherit',
-    '---',
-    '',
-  ].join('\n');
-  const body = [
-    'You are **standards-enforcer**, an auditor for the organization\'s engineering standards. Your job is to check code against the compiled rule catalog and report exactly what blocks, what warns, and what needs a human — never overstating a rule\'s teeth.',
-    '',
-    REVIEW_PROTOCOL,
-    '',
-    'Your final message is a report, not a conversation: lead with the verdict line, then the grouped findings.',
-    '',
-  ].join('\n');
-  return fm + body;
-}
-
 // ---- write ----
 function writeFile(path, content) {
   mkdirSync(dirname(path), { recursive: true });
   writeFileSync(path, content);
   console.log(`  wrote ${path}`);
+}
+
+// Copy a static template verbatim (byte-for-byte) into the target project.
+function copyTemplate(src, dest) {
+  writeFile(dest, readFileSync(src, 'utf8'));
 }
 
 function main() {
@@ -243,9 +178,10 @@ function main() {
   const active = rules.filter(r => r.status === 'active');
   console.log(`✓ validated ${rules.length} rules (${active.filter(blocks).length} block)`);
 
+  // Generate the compiled catalog; copy the skill + agent verbatim from the static templates.
   writeFile(join(claudeDir, 'skills', 'standards-review', 'rules.md'), renderRulesCatalog(rules));
-  writeFile(join(claudeDir, 'skills', 'standards-review', 'SKILL.md'), renderSkill());
-  writeFile(join(claudeDir, 'agents', 'standards-enforcer.md'), renderAgent());
+  copyTemplate(SKILL_TEMPLATE, join(claudeDir, 'skills', 'standards-review', 'SKILL.md'));
+  copyTemplate(AGENT_TEMPLATE, join(claudeDir, 'agents', 'standards-enforcer.md'));
   console.log(`✓ rendered standards-review skill + standards-enforcer agent into ${claudeDir}`);
 }
 

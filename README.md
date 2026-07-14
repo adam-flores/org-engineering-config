@@ -1,10 +1,10 @@
 # org-engineering-config
 
-> **Status: Stage 3 — polishing the design in light of what authoring taught us.** The design
-> (Stage 1) and the neutral guidance-item schema with real guidance across all seven domains
-> (Stage 2) are in place. Stage 3's headline change — splitting enforcement into *where a violation
-> is caught* and *what a coding agent should do about it* — has landed. Adapters and CI workflows are
-> still ahead (see below). Feedback on both the design and the source format is welcome.
+> **Status: Stage 3 done — Phase-2 build underway.** The design (Stage 1), the neutral guidance-item
+> schema with real guidance across all seven domains (Stage 2), and Stage 3's enforcement redesign —
+> splitting *where a violation is caught* from *what a coding agent should do about it* — are all in
+> place. The Claude Code adapter, two worked example apps, and an adoption guide are built; CI
+> workflows are still ahead (see below). Feedback on both the design and the source format is welcome.
 
 A **tool-agnostic, versioned, contributable source of truth for engineering standards** — the way an
 organization scales any shared standard. Individuals **pull** current guidance into their projects and
@@ -82,6 +82,7 @@ organization scales any shared standard. Individuals **pull** current guidance i
 - [`guidance/`](guidance/) — the guidance catalog: real rules across all seven domains ([index](guidance/README.md)).
 - [`adapters/`](adapters/) — build targets that render the neutral source into a tool's format; the
   [Claude Code adapter](adapters/claude-code/) generates a `standards-review` skill + `standards-enforcer` agent.
+- [`examples/`](examples/) — a conforming and a violating sample app, each with the rendered reviewer, to see it pass and block.
 
 ## Staged rollout
 
@@ -90,7 +91,8 @@ organization scales any shared standard. Individuals **pull** current guidance i
 - **Stage 3 — done:** enforcement split into `enforcement_point` (where a violation is caught) and
   `agent_action` (what a coding agent does), with control `references` on `Policy` rules.
 - **Phase 2 (build) — in progress:** the [Claude Code adapter](adapters/claude-code/) renders the
-  neutral source into a `standards-review` skill and `standards-enforcer` agent. Next: two sample apps
-  + a test matrix, an adoption guide, then the GitHub Actions (freshness gate, promotion, bump bot).
+  neutral source into a `standards-review` skill and `standards-enforcer` agent, with two
+  [example apps](examples/) (conforming + violating) and a [How-To-Use adoption guide](docs/HOW-TO-USE.md).
+  Next: the GitHub Actions (freshness gate, promotion, bump bot).
 - **Phase 2 (enforcement) — later:** the non-overridable managed-settings tier and live-fire
   validation (a policy that intentionally breaks one app, to prove the gate blocks in anger).
