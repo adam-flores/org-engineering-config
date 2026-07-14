@@ -1,14 +1,21 @@
 # org-engineering-config
 
 > **Status: Stage 3 done — Phase-2 build underway.** The design (Stage 1), the neutral guidance-item
-> schema with real guidance across all seven domains (Stage 2), and Stage 3's enforcement redesign —
+> schema with a sample rule-set across all seven domains (Stage 2), and Stage 3's enforcement redesign —
 > splitting *where a violation is caught* from *what a coding agent should do about it* — are all in
 > place. The Claude Code adapter, two worked example apps, and an adoption guide are built; CI
 > workflows are still ahead (see below). Feedback on both the design and the source format is welcome.
 
-A **tool-agnostic, versioned, contributable source of truth for engineering standards** — the way an
+A **tool-agnostic, versioned, contributable mechanism for engineering standards** — the way an
 organization scales any shared standard. Individuals **pull** current guidance into their projects and
 **contribute** improvements back via pull request. Once promoted, an improvement becomes everyone's default.
+
+> **What is the product here?** The product is the **mechanism** — the neutral guidance-item schema, the
+> four-axis taxonomy, the pinned + CI-freshness governance model, and the adapters that render the source
+> into a tool. The rules under [`guidance/`](guidance/) are a **proof-of-concept sample** that exercises
+> that mechanism, **not** an enacted org standard: they let us prove the pipeline end-to-end. A real
+> organization replaces them with its own authored rules — see [staged rollout](#staged-rollout) for how
+> the sample eventually migrates out into an enacted-standards repo.
 
 ## The core idea
 
@@ -79,15 +86,17 @@ organization scales any shared standard. Individuals **pull** current guidance i
 - [`docs/HOW-TO-USE.md`](docs/HOW-TO-USE.md) — adopt this in an org: setup, worked samples, and a "how I know it's working" self-check.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — how to propose or change a rule, using the classification framework.
 - [`docs/GUIDANCE-SCHEMA.md`](docs/GUIDANCE-SCHEMA.md) — the neutral guidance-item format (frontmatter + body).
-- [`guidance/`](guidance/) — the guidance catalog: real rules across all seven domains ([index](guidance/README.md)).
+- [`guidance/`](guidance/) — the guidance catalog: a **sample rule-set** (proof-of-concept, not enacted policy) across all seven domains ([index](guidance/README.md)).
 - [`adapters/`](adapters/) — build targets that render the neutral source into a tool's format; the
   [Claude Code adapter](adapters/claude-code/) generates a `standards-review` skill + `standards-enforcer` agent.
 - [`examples/`](examples/) — a conforming and a violating sample app, each with the rendered reviewer, to see it pass and block.
+- [`examples/demos/python-only/`](examples/demos/python-only/) — a self-contained, demoable scenario: its own two-rule guidance ("Python only, Node prohibited") renders a reviewer that **blocks** a Node app with a "rewrite it in Python" remediation task and **passes** the Python rewrite — a vivid before/after showing that swapping the guidance changes enforcement with no code change.
 
 ## Staged rollout
 
 - **Stage 1 — done:** the design + conventions, for peer review.
-- **Stage 2 — done:** the neutral guidance-item schema and real guidance authored across all seven domains.
+- **Stage 2 — done:** the neutral guidance-item schema and a sample rule-set authored across all seven
+  domains to exercise the mechanism (a real org replaces it with its own).
 - **Stage 3 — done:** enforcement split into `enforcement_point` (where a violation is caught) and
   `agent_action` (what a coding agent does), with control `references` on `Policy` rules.
 - **Phase 2 (build) — in progress:** the [Claude Code adapter](adapters/claude-code/) renders the
@@ -96,3 +105,9 @@ organization scales any shared standard. Individuals **pull** current guidance i
   Next: the GitHub Actions (freshness gate, promotion, bump bot).
 - **Phase 2 (enforcement) — later:** the non-overridable managed-settings tier and live-fire
   validation (a policy that intentionally breaks one app, to prove the gate blocks in anger).
+- **Later — the product/sample split (roadmap, not built):** once the mechanism is validated, separate
+  the three concerns into three repos: (1) **this repo** keeps only the *mechanism* plus a light,
+  axis-complete skeleton sample; (2) a **template repository** an org instantiates to author its own
+  enacted standards (the current sample rule-set migrates here); (3) a **consumer app** outside that
+  repo that pulls the enacted standards. Today everything lives here, together, on purpose — it keeps
+  the mechanism legible while we prove it.

@@ -4,10 +4,17 @@ How to work in this repo. Read this before proposing changes.
 
 ## What this repo is
 
-`org-engineering-config` is a **tool-agnostic, versioned, contributable source of truth for
-engineering standards**. Guidance lives as neutral markdown + metadata; tool-specific packaging
-(e.g. Claude Code) is produced by **adapters**. Individuals **pull** current guidance into their
-projects and **contribute** improvements back via pull request.
+`org-engineering-config` is a **tool-agnostic, versioned, contributable mechanism for engineering
+standards**. Guidance lives as neutral markdown + metadata; tool-specific packaging (e.g. Claude Code)
+is produced by **adapters**. Individuals **pull** current guidance into their projects and
+**contribute** improvements back via pull request.
+
+**Product vs. sample — keep this straight.** The *product* is the mechanism: the guidance-item schema,
+the four-axis taxonomy, the governance model, and the adapters. The 53 rules under `guidance/` are a
+**proof-of-concept sample** that exercises the mechanism, **not** enacted org policy. Don't treat the
+rule-set as the deliverable; treat it as test material we can add to, re-severity, or remove to prove
+the pipeline. (Roadmap: once validated, the sample migrates into a separate template/enacted-standards
+repo and this repo keeps only a light skeleton — see "Current stage.")
 
 Key docs: [`README.md`](README.md) (elevator pitch + the core idea), [`docs/GUIDANCE-SCHEMA.md`](docs/GUIDANCE-SCHEMA.md)
 (the guidance-item format), [`CONTRIBUTING.md`](CONTRIBUTING.md) (how to propose or change a rule),
@@ -16,7 +23,7 @@ and the guidance catalog at [`guidance/README.md`](guidance/README.md).
 ## Current stage
 
 **Stage 3 — the design polish is landing, and we're crossing into Phase-2 build.** Stages 1–2 are done
-(the design, the guidance-item schema, and real guidance across all seven domains). Stage 3's headline
+(the design, the guidance-item schema, and a sample rule-set across all seven domains). Stage 3's headline
 change is complete: enforcement is now **two axes** — `enforcement_point` (*where* a violation is
 caught: `coding-agent`/`pre-commit`/`ci-gate`/`managed-platform`/`human-review`/`audit`/`none`) and
 `agent_action` (*what a coding agent does*: `enforce`/`align`/`aware`). Severity still means *how
@@ -30,11 +37,19 @@ neutral guidance into a reviewer skill + agent, then two `examples/` apps + a te
 How-To-Use adoption guide. That work introduces **executable tooling** — authorized by the current
 plan, kept under `adapters/`/`examples/`, and never leaking tool assumptions into the neutral source.
 
-## Where we left off (2026-07-13)
+## Where we left off (2026-07-14)
 
-Current catalog: **53 rules** across 7 domains — 2 Policy · 20 Strategic · 31 Handbook. Enforcement
+Sample catalog: **53 rules** across 7 domains — 2 Policy · 20 Strategic · 31 Handbook. Enforcement
 point: 20 `ci-gate` · 5 `pre-commit` · 12 `audit` · 15 `human-review` · 1 `none`. Agent action: 18
-`enforce` · 28 `align` · 7 `aware`. **17 rules block** (required + `ci-gate`).
+`enforce` · 28 `align` · 7 `aware`. **17 rules block** (required + `ci-gate`). (These are the sample's
+composition — test material, not enacted policy.)
+
+**Deferred redesign (roadmap, not built yet).** Once the mechanism is validated, split the three
+concerns into three repos: (1) this repo keeps only the mechanism + a light, axis-complete skeleton
+sample; (2) a **template repository** an org instantiates to author its own enacted standards (the
+current 53-rule sample migrates here — which is why we don't trim or delete it now); (3) a **consumer
+app** outside that repo that pulls the enacted standards. Until then, everything stays in one repo so
+the mechanism is legible while we prove it.
 
 Resolved in the model-redesign change:
 - The two-field enforcement model (`enforcement_point` + `agent_action`) and `references` for Policy.
@@ -52,14 +67,15 @@ Still open / next:
 
 ## Conventions
 
-### Documentation is the product (for now)
+### The mechanism is the product; prose is how we express it (for now)
 
-- The deliverable is prose and metadata: clear, reviewable guidance. Optimize every change for a
-  reviewer reading top-to-bottom.
+- The product is the **mechanism** (schema, taxonomy, governance model, adapters). While we prove it,
+  that mechanism — and the sample rule-set that exercises it — is expressed as prose and metadata:
+  clear, reviewable markdown. Optimize every change for a reviewer reading top-to-bottom.
 - Keep the README as the **index and summary** and the guidance catalog
-  ([`guidance/README.md`](guidance/README.md)) as the rule index; detail lives in each rule file and
-  in `docs/`. If any two of them disagree, that's a bug — fix it in the same change.
-- Prefer plain markdown. Tables for taxonomies. No build steps.
+  ([`guidance/README.md`](guidance/README.md)) as the **sample** rule index; detail lives in each rule
+  file and in `docs/`. If any two of them disagree, that's a bug — fix it in the same change.
+- Prefer plain markdown. Tables for taxonomies. No build steps in the neutral source.
 
 ### Terminology (use these exact terms)
 

@@ -12,6 +12,7 @@ Planted violations (each marked with a `!! DELIBERATE VIOLATION !!` comment in t
 | `src/db.mjs` | `arch-no-local-sql-databases` | Strategic · ci-gate | **BLOCK** |
 | `test/server.test.mjs` | `qual-no-skipped-tests` | Strategic · ci-gate | **BLOCK** |
 | `src/server.mjs` | `obs-no-pii-in-logs` | Strategic · audit | REQUIRED (unenforceable) |
+| `src/server.mjs` | `obs-data-classification` | Strategic · audit · **aware** | REQUIRED (unenforceable) → **raise to the human** |
 | `src/server.mjs` | `obs-structured-logging` | Handbook · audit | ADVISORY |
 | `.github/workflows/ci.yml` | `integ-pin-third-party-actions` | Handbook · ci-gate | **WARN** |
 
@@ -19,6 +20,11 @@ The reviewer also legitimately surfaces findings that **follow from** the plante
 `qual-unit-test-coverage` (a skipped-only suite leaves new code uncovered → Strategic · ci-gate →
 **BLOCK**) and `env-local-secrets-handling` (the hardcoded secret → advisory). Exact counts vary with
 the review; expect a **`BLOCKED`** verdict with **at least the three ci-gate violations** above.
+
+The `obs-data-classification` violation is `aware` — a coding agent can't self-satisfy it — so it is
+the finding that exercises the remediation plan's **"raise to the human"** group, while the `enforce`
+and `align` findings populate the **"go do"** group (BLOCK-first). This fixture therefore demonstrates
+both halves of the coding-agent handoff.
 
 The fake secret in `config.mjs` is an obviously-marked placeholder, not a real credential.
 

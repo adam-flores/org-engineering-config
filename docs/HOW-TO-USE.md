@@ -4,6 +4,11 @@ This guide is for someone adopting `org-engineering-config` in a **new organizat
 up, get started, confirm it's working, and think about rolling it out at scale. No prior context
 assumed.
 
+> **What you adopt is the mechanism**, not the bundled rules. The rules under `guidance/` are a
+> **proof-of-concept sample** that ships so you can see the pipeline work end-to-end; a real
+> organization replaces them with its own authored rules. Everywhere below, "the guidance" means
+> *whatever rule-set you point the adapter at* — the sample today, your own once you fork it.
+
 If you just want the mental model first, read the [README](../README.md); the rule format is in
 [`GUIDANCE-SCHEMA.md`](GUIDANCE-SCHEMA.md), and how to propose changes is in
 [`CONTRIBUTING.md`](../CONTRIBUTING.md).
@@ -21,7 +26,7 @@ flowchart LR
   AD --> AG[".claude/agents/standards-enforcer"]
   SK --> RV["/standards-review"]
   AG --> RV
-  RV --> REP["report:<br/>BLOCK / WARN / notes"]
+  RV --> REP["report + remediation plan:<br/>BLOCK / WARN / notes<br/>+ go-do / raise-to-human"]
 ```
 
 ## What actually blocks
@@ -67,7 +72,10 @@ self-satisfy it).
    ```
 
    It reviews your current diff (or the whole repo), and reports findings grouped **BLOCK → WARN →
-   notes**, ending in a `PASS` or `BLOCKED — n` verdict. For a deep multi-file audit, hand off to the
+   notes**, then a **remediation plan packaged for a coding agent** — routed **go-do** (the `enforce`/
+   `align` fixes, BLOCK-first) vs **raise-to-human** (the `aware` items) — that you can hand straight to
+   your coding agent in one step, ending in a `PASS` or `BLOCKED — n` verdict. The reviewer audits and
+   hands off; it does not edit code itself. For a deep multi-file audit, hand off to the
    `standards-enforcer` subagent.
 
 4. **Re-render when the guidance changes.** Re-running the adapter is the "pull the current standards"
@@ -102,6 +110,7 @@ reviewer succeed and fail on purpose.
   | skipped test (`test/server.test.mjs`) | `qual-no-skipped-tests` (Strategic · ci-gate) | **BLOCK** |
   | unpinned CI action (`ci.yml`) | `integ-pin-third-party-actions` (Handbook · ci-gate) | **WARN** |
   | PII in a log (`src/server.mjs`) | `obs-no-pii-in-logs` (Strategic · audit) | required, unenforceable — surfaced, not blocked |
+  | unclassified personal data (`src/server.mjs`) | `obs-data-classification` (Strategic · audit · **aware**) | required, unenforceable — **raise to the human** in the remediation plan |
 
 **Your self-check on a real repo:** render the reviewer into a clean project → expect `PASS`. Then
 plant one obvious violation (commit a fake `API_KEY = "..."`), re-run → expect a **BLOCK** finding that

@@ -1,11 +1,15 @@
-# Guidance catalog
+# Guidance catalog (sample rule-set)
 
-The neutral source of truth: one markdown file per rule, classified by
-`domain × severity × enforcement_point × agent_action`. Format is defined in
-[`../docs/GUIDANCE-SCHEMA.md`](../docs/GUIDANCE-SCHEMA.md); how to propose or change a rule is in
-[`../CONTRIBUTING.md`](../CONTRIBUTING.md).
+> **Sample content — a proof-of-concept rule-set, not enacted policy.** These rules demonstrate the
+> neutral-source *format* and exercise the mechanism end-to-end; they are **not** an organization's
+> adopted standards. A real org replaces this catalog with its own authored rules. The **product** is
+> the mechanism (schema + taxonomy + adapters), not any particular rule below.
 
-**53 rules across 7 domains.**
+One markdown file per rule, classified by `domain × severity × enforcement_point × agent_action`.
+Format is defined in [`../docs/GUIDANCE-SCHEMA.md`](../docs/GUIDANCE-SCHEMA.md); how to propose or change
+a rule is in [`../CONTRIBUTING.md`](../CONTRIBUTING.md).
+
+This sample carries **53 rules across 7 domains.**
 Severity: 2 Policy · 20 Strategic · 31 Handbook.
 Enforcement point: 20 `ci-gate` · 5 `pre-commit` · 12 `audit` · 15 `human-review` · 1 `none`.
 Agent action: 18 `enforce` · 28 `align` · 7 `aware`.
