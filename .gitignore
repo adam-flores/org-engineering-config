@@ -1,0 +1,3 @@
+# Local, per-machine Claude Code settings are not committed (dogfoods env-gitignore-local-settings).
+/.claude/settings.json
+/.claude/settings.local.json
