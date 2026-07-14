@@ -3,7 +3,8 @@ id: obs-health-readiness-endpoints
 title: Expose health and readiness endpoints
 domain: Observability & Data
 severity: Handbook
-enforcement: retroactive
+enforcement_point: audit
+agent_action: align
 status: active
 since: 0.1.0
 tags: [health-check, readiness, observability, deployment]
@@ -24,6 +25,12 @@ both rely on.
 
 Long-running services. Batch jobs, functions, and short-lived tasks are out of scope; their health is
 observed differently.
+
+## Enforcement
+
+**Enforcement point:** `audit` — caught at a retroactive audit or periodic scan, after the fact. Advisory — surfaced by review or local tooling, not gated.
+
+**Agent action:** `align` — a coding agent should shape its output to comply — the authoritative check is elsewhere.
 
 ## Exceptions
 

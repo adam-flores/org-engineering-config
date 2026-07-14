@@ -3,7 +3,8 @@ id: qual-deterministic-tests
 title: Tests must be deterministic and isolated
 domain: Quality & Testing
 severity: Handbook
-enforcement: retroactive
+enforcement_point: audit
+agent_action: enforce
 status: active
 since: 0.1.0
 tags: [testing, flaky, determinism, isolation]
@@ -25,6 +26,12 @@ isolated tests keep a red build meaningful.
 
 Automated tests at every level. Tests that deliberately exercise real external systems (a contract or
 smoke test) should isolate that dependency or be clearly separated from the deterministic suite.
+
+## Enforcement
+
+**Enforcement point:** `audit` — caught at a retroactive audit or periodic scan, after the fact. Advisory — surfaced by review or local tooling, not gated.
+
+**Agent action:** `enforce` — a coding agent should actively prevent and fix violations as it writes code.
 
 ## Exceptions
 

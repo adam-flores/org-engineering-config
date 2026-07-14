@@ -3,7 +3,8 @@ id: cicd-post-deploy-validation
 title: Validate deployments after release
 domain: Delivery & CI/CD
 severity: Handbook
-enforcement: retroactive
+enforcement_point: audit
+agent_action: aware
 status: active
 since: 0.1.0
 tags: [deployment, validation, smoke-tests, health-checks, rollback]
@@ -25,6 +26,12 @@ what makes a rollback decision automatic instead of a 2am judgment call.
 ## Scope
 
 Production (and staging) deployments of services. Local runs and developer sandboxes are out of scope.
+
+## Enforcement
+
+**Enforcement point:** `audit` — caught at a retroactive audit or periodic scan, after the fact. Advisory — surfaced by review or local tooling, not gated.
+
+**Agent action:** `aware` — a coding agent cannot self-satisfy this rule; it should surface it and never undermine it.
 
 ## Exceptions
 

@@ -3,7 +3,8 @@ id: obs-data-classification
 title: Classify data and handle it by its class
 domain: Observability & Data
 severity: Strategic
-enforcement: retroactive
+enforcement_point: audit
+agent_action: aware
 status: active
 since: 0.1.0
 tags: [data-classification, pii, governance, privacy]
@@ -25,8 +26,14 @@ foundation the stricter controls (encryption, access, retention) build on.
 
 Application and analytics data at rest and in flight.
 
+## Enforcement
+
+**Enforcement point:** `audit` — caught at a retroactive audit or periodic scan, after the fact. It is **required but unenforceable** at a gate — held by review and culture, not a hard block.
+
+**Agent action:** `aware` — a coding agent cannot self-satisfy this rule; it should surface it and never undermine it.
+
 ## Exceptions
 
-Required (Strategic), enforced `retroactive`ly — classifications are checked by audit, not a pre-merge
-gate. This overlaps Security & Compliance: in a built-out enterprise, data classification and PII
-handling would most likely live there as a **Policy** control. Revisit its home in the Stage-3 polish.
+A legitimate deviation (e.g. a dataset whose class is still being determined) is noted in the change
+description and resolved before release. This rule overlaps Security & Compliance: in a built-out
+enterprise, data classification would most likely live there as a **Policy** control.

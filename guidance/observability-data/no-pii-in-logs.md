@@ -3,7 +3,8 @@ id: obs-no-pii-in-logs
 title: Keep secrets and PII out of logs and telemetry
 domain: Observability & Data
 severity: Strategic
-enforcement: retroactive
+enforcement_point: audit
+agent_action: enforce
 status: active
 since: 0.1.0
 tags: [pii, secrets, logging, privacy, data-in-telemetry]
@@ -27,8 +28,14 @@ of compliance risk.
 All emitted telemetry across services. This is the data-in-telemetry sibling of the source-control rule
 [`sec-no-plaintext-secrets`](../security-compliance/no-plaintext-secrets.md).
 
+## Enforcement
+
+**Enforcement point:** `audit` — caught at a retroactive audit or periodic scan, after the fact. It is **required but unenforceable** at a gate — held by review and culture, not a hard block.
+
+**Agent action:** `enforce` — a coding agent should actively prevent and fix violations as it writes code.
+
 ## Exceptions
 
-Required (Strategic), enforced `retroactive`ly — a telemetry/log scan or audit catches PII after the
-fact; there's no pre-merge gate, so it doesn't block. In a built-out enterprise this is a strong
-candidate for a Security & Compliance **Policy** control, given the compliance exposure.
+None by default — leaked PII is an incident: scrub the field and purge the affected telemetry. In a
+built-out enterprise this is a strong candidate for a Security & Compliance **Policy** control, given
+the compliance exposure.

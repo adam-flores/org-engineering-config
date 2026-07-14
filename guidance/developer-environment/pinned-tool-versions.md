@@ -3,7 +3,8 @@ id: env-pinned-tool-versions
 title: Pin local runtime and tool versions
 domain: Developer Environment
 severity: Handbook
-enforcement: retroactive
+enforcement_point: audit
+agent_action: align
 status: active
 since: 0.1.0
 tags: [versions, toolchain, reproducibility, mise, nvm]
@@ -24,6 +25,12 @@ it up automatically.
 ## Scope
 
 Repositories with a language runtime or build toolchain. Purely static content is out of scope.
+
+## Enforcement
+
+**Enforcement point:** `audit` — caught at a retroactive audit or periodic scan, after the fact. Advisory — surfaced by review or local tooling, not gated.
+
+**Agent action:** `align` — a coding agent should shape its output to comply — the authoritative check is elsewhere.
 
 ## Exceptions
 

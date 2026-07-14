@@ -3,7 +3,8 @@ id: integ-ai-usage-guardrails
 title: Use only approved AI tools with company code
 domain: Integrations & Tooling
 severity: Strategic
-enforcement: none
+enforcement_point: human-review
+agent_action: align
 status: active
 since: 0.1.0
 tags: [ai, guardrails, data-protection, claude]
@@ -26,6 +27,12 @@ anti-AI: approved AI use is encouraged — the guardrail is *which* tool, not *w
 ## Scope
 
 Any use of AI tools on company code, data, or confidential material.
+
+## Enforcement
+
+**Enforcement point:** `human-review` — caught at human review at PR time (no mechanical gate). It is **required but unenforceable** at a gate — held by review and culture, not a hard block.
+
+**Agent action:** `align` — a coding agent should shape its output to comply — the authoritative check is elsewhere.
 
 ## Exceptions
 

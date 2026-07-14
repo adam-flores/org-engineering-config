@@ -3,7 +3,8 @@ id: env-reproducible-setup
 title: Make local setup reproducible
 domain: Developer Environment
 severity: Handbook
-enforcement: retroactive
+enforcement_point: audit
+agent_action: align
 status: active
 since: 0.1.0
 tags: [onboarding, devcontainer, bootstrap, reproducibility]
@@ -25,6 +26,12 @@ into a fixable, version-controlled artifact instead of tribal knowledge.
 
 Application and service repositories that others are expected to run locally. A throwaway or
 single-owner script is out of scope.
+
+## Enforcement
+
+**Enforcement point:** `audit` — caught at a retroactive audit or periodic scan, after the fact. Advisory — surfaced by review or local tooling, not gated.
+
+**Agent action:** `align` — a coding agent should shape its output to comply — the authoritative check is elsewhere.
 
 ## Exceptions
 

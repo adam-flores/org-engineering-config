@@ -3,7 +3,8 @@ id: arch-adrs
 title: Record significant decisions as ADRs
 domain: Architecture & Tech Stack
 severity: Handbook
-enforcement: retroactive
+enforcement_point: audit
+agent_action: align
 status: active
 since: 0.1.0
 tags: [documentation, adr, decisions]
@@ -25,6 +26,12 @@ shape.
 
 Decisions with lasting or cross-cutting impact (a datastore choice, a service boundary, a framework
 adoption). Routine, easily reversible choices don't need an ADR.
+
+## Enforcement
+
+**Enforcement point:** `audit` — caught at a retroactive audit or periodic scan, after the fact. Advisory — surfaced by review or local tooling, not gated.
+
+**Agent action:** `align` — a coding agent should shape its output to comply — the authoritative check is elsewhere.
 
 ## Exceptions
 

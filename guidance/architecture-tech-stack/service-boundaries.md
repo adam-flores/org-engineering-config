@@ -3,7 +3,8 @@ id: arch-service-boundaries
 title: Cross service boundaries through APIs, not shared databases
 domain: Architecture & Tech Stack
 severity: Handbook
-enforcement: none
+enforcement_point: human-review
+agent_action: align
 status: active
 since: 0.1.0
 tags: [service-boundaries, data-ownership, coupling]
@@ -24,6 +25,12 @@ lets each service evolve its storage freely — the system-level counterpart to 
 
 Services that own persistent data. A deliberately shared datastore owned by a single team (with that
 ownership documented) is out of scope.
+
+## Enforcement
+
+**Enforcement point:** `human-review` — caught at human review at PR time (no mechanical gate). Advisory — surfaced by review or local tooling, not gated.
+
+**Agent action:** `align` — a coding agent should shape its output to comply — the authoritative check is elsewhere.
 
 ## Exceptions
 

@@ -3,7 +3,8 @@ id: arch-api-first-design
 title: Design the API contract first
 domain: Architecture & Tech Stack
 severity: Handbook
-enforcement: none
+enforcement_point: human-review
+agent_action: align
 status: active
 since: 0.1.0
 tags: [api, design, contracts]
@@ -25,6 +26,12 @@ rather than accidental.
 
 Services, and integrations that expose or consume an interface across a team or system boundary.
 Purely internal, single-module code is out of scope.
+
+## Enforcement
+
+**Enforcement point:** `human-review` — caught at human review at PR time (no mechanical gate). Advisory — surfaced by review or local tooling, not gated.
+
+**Agent action:** `align` — a coding agent should shape its output to comply — the authoritative check is elsewhere.
 
 ## Exceptions
 

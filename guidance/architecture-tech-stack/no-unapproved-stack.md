@@ -3,7 +3,8 @@ id: arch-no-unapproved-stack
 title: No frontend frameworks or API languages outside the approved set
 domain: Architecture & Tech Stack
 severity: Strategic
-enforcement: central
+enforcement_point: ci-gate
+agent_action: enforce
 status: active
 since: 0.1.0
 tags: [frontend, backend, languages, frameworks, tech-stack, prohibition]
@@ -34,6 +35,12 @@ The **primary** stack of a new application or service, as identified by its main
 tooling, and incidental dependencies are out of scope, as is any existing system until a major
 rewrite. This scoping is what keeps the check honest — it keys off the service's primary manifest, not
 every file in the repo.
+
+## Enforcement
+
+**Enforcement point:** `ci-gate` — caught at a CI gate. Because it is required and centrally gated, this rule **blocks** the PR/release.
+
+**Agent action:** `enforce` — a coding agent should actively prevent and fix violations as it writes code.
 
 ## Exceptions
 

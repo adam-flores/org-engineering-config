@@ -3,7 +3,8 @@ id: integ-new-tool-approval
 title: Route new tools through the approval path
 domain: Integrations & Tooling
 severity: Handbook
-enforcement: none
+enforcement_point: human-review
+agent_action: aware
 status: active
 since: 0.1.0
 tags: [governance, tooling, approval, process]
@@ -25,6 +26,12 @@ licensing and security questions are answered once, up front.
 
 New tools, services, and integrations that touch company code or data. Trying something out locally
 with no company data is out of scope until it's proposed for real use.
+
+## Enforcement
+
+**Enforcement point:** `human-review` — caught at human review at PR time (no mechanical gate). Advisory — surfaced by review or local tooling, not gated.
+
+**Agent action:** `aware` — a coding agent cannot self-satisfy this rule; it should surface it and never undermine it.
 
 ## Exceptions
 

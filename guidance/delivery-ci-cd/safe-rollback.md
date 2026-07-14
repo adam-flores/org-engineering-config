@@ -3,7 +3,8 @@ id: cicd-safe-rollback
 title: Every release must have a safe rollback path
 domain: Delivery & CI/CD
 severity: Handbook
-enforcement: none
+enforcement_point: human-review
+agent_action: align
 status: active
 since: 0.1.0
 tags: [rollback, releases, recovery, deployment]
@@ -26,6 +27,12 @@ migrations, data changes — to be thought through before they ship, not after t
 
 Deployable services and any change to persistent data or schema. Stateless, trivially revertible
 changes need no special plan beyond the standard revert.
+
+## Enforcement
+
+**Enforcement point:** `human-review` — caught at human review at PR time (no mechanical gate). Advisory — surfaced by review or local tooling, not gated.
+
+**Agent action:** `align` — a coding agent should shape its output to comply — the authoritative check is elsewhere.
 
 ## Exceptions
 

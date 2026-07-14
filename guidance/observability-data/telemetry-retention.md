@@ -3,7 +3,8 @@ id: obs-telemetry-retention
 title: Define retention windows for telemetry
 domain: Observability & Data
 severity: Strategic
-enforcement: retroactive
+enforcement_point: audit
+agent_action: aware
 status: active
 since: 0.1.0
 tags: [retention, logging, telemetry, data-lifecycle]
@@ -25,7 +26,14 @@ balances debuggability, cost, and data-minimization.
 Operational telemetry (logs, metrics, traces). Regulatory retention of *business or user data* is a
 compliance concern and lives in Security & Compliance, not here.
 
+## Enforcement
+
+**Enforcement point:** `audit` — caught at a retroactive audit or periodic scan, after the fact. It is **required but unenforceable** at a gate — held by review and culture, not a hard block.
+
+**Agent action:** `aware` — a coding agent cannot self-satisfy this rule; it should surface it and never undermine it.
+
 ## Exceptions
 
-Required (Strategic), enforced `retroactive`ly — retention is governed by the telemetry platform's
-configuration and checked by audit, not a pre-merge gate.
+Retention is governed by the telemetry platform's configuration; a legitimate deviation (e.g. a
+longer window for a regulated dataset) is recorded with its justification and reviewed on the next
+audit.

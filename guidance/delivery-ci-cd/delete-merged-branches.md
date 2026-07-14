@@ -3,7 +3,8 @@ id: cicd-delete-merged-branches
 title: Delete branches after they merge
 domain: Delivery & CI/CD
 severity: Handbook
-enforcement: central
+enforcement_point: ci-gate
+agent_action: align
 status: active
 since: 0.1.0
 tags: [branching, github-flow, hygiene]
@@ -25,6 +26,12 @@ short-lived.
 
 Topic and feature branches in application and service repositories. Protected and long-lived
 release-line branches are, by definition, out of scope.
+
+## Enforcement
+
+**Enforcement point:** `ci-gate` — caught at a CI gate. It runs in CI but only **warns** — Handbook rules never block.
+
+**Agent action:** `align` — a coding agent should shape its output to comply — the authoritative check is elsewhere.
 
 ## Exceptions
 

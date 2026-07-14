@@ -3,7 +3,8 @@ id: env-pre-commit-hooks
 title: Provide standard pre-commit hooks
 domain: Developer Environment
 severity: Handbook
-enforcement: local
+enforcement_point: pre-commit
+agent_action: align
 status: active
 since: 0.1.0
 tags: [pre-commit, hooks, formatting, scanning, shift-left]
@@ -25,6 +26,12 @@ lint, and scan happen automatically instead of relying on memory. It's the mecha
 ## Scope
 
 Application and service repositories. Docs-only repositories may use a lighter set.
+
+## Enforcement
+
+**Enforcement point:** `pre-commit` — caught at a pre-commit hook or local scan (real, but bypassable). Advisory — surfaced by review or local tooling, not gated.
+
+**Agent action:** `align` — a coding agent should shape its output to comply — the authoritative check is elsewhere.
 
 ## Exceptions
 

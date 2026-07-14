@@ -3,7 +3,8 @@ id: qual-accessibility-checks
 title: UI must pass automated accessibility checks
 domain: Quality & Testing
 severity: Strategic
-enforcement: central
+enforcement_point: ci-gate
+agent_action: enforce
 status: active
 since: 0.1.0
 tags: [testing, accessibility, a11y, ui]
@@ -24,6 +25,12 @@ keeps the product usable for everyone and supports the compliance obligations th
 
 Applications and services with a user interface. Headless services are out of scope. Pairs with
 [`qual-ui-automated-testing`](ui-automated-testing.md), which runs the behavioral UI suite.
+
+## Enforcement
+
+**Enforcement point:** `ci-gate` — caught at a CI gate. Because it is required and centrally gated, this rule **blocks** the PR/release.
+
+**Agent action:** `enforce` — a coding agent should actively prevent and fix violations as it writes code.
 
 ## Exceptions
 

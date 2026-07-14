@@ -3,7 +3,8 @@ id: obs-correlation-ids
 title: Propagate correlation IDs across services
 domain: Observability & Data
 severity: Handbook
-enforcement: none
+enforcement_point: human-review
+agent_action: align
 status: active
 since: 0.1.0
 tags: [tracing, correlation-id, observability, distributed]
@@ -25,6 +26,12 @@ one user's path through the system.
 
 Services that call, or are called by, other services. A fully standalone service with no downstream
 calls gets less from this but still benefits from a per-request id.
+
+## Enforcement
+
+**Enforcement point:** `human-review` — caught at human review at PR time (no mechanical gate). Advisory — surfaced by review or local tooling, not gated.
+
+**Agent action:** `align` — a coding agent should shape its output to comply — the authoritative check is elsewhere.
 
 ## Exceptions
 

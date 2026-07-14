@@ -3,7 +3,8 @@ id: qual-unit-test-coverage
 title: Meet the unit-test coverage bar on new code
 domain: Quality & Testing
 severity: Strategic
-enforcement: central
+enforcement_point: ci-gate
+agent_action: enforce
 status: active
 since: 0.1.0
 tags: [testing, coverage, unit-tests]
@@ -27,6 +28,12 @@ under test, not that the assertions are meaningful — so treat the bar as neces
 
 Unit-tested application and service code. Generated code, migrations, and throwaway spikes are
 excluded from the measurement.
+
+## Enforcement
+
+**Enforcement point:** `ci-gate` — caught at a CI gate. Because it is required and centrally gated, this rule **blocks** the PR/release.
+
+**Agent action:** `enforce` — a coding agent should actively prevent and fix violations as it writes code.
 
 ## Exceptions
 
