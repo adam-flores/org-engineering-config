@@ -91,7 +91,9 @@ reviewer succeed and fail on purpose.
   `/standards-review` against it returns **`PASS` — zero BLOCK findings**. (Its tests also pass:
   `cd examples/conforming-app && node --test`.)
 - **[`examples/violating-app`](../examples/violating-app)** plants one violation per severity band.
-  Running `/standards-review` against it returns **`BLOCKED — 3`**, for example:
+  Running `/standards-review` against it returns a **`BLOCKED`** verdict — at least the three
+  `ci-gate` violations below, and often related findings the reviewer derives (e.g. a skipped-only
+  suite failing `qual-unit-test-coverage`). Exact counts vary with the review:
 
   | Finding | Rule | Result |
   |---|---|---|
