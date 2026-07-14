@@ -92,8 +92,12 @@ was already running, start a new session so it picks them up.)
 ```
 
 It reviews your current diff by default (or the whole repo), then reports findings grouped
-**BLOCK → WARN → notes**, ending in a `PASS` or `BLOCKED — n` verdict.
+**BLOCK → WARN → notes**, followed by a **remediation plan packaged for a coding agent** — routed
+**go-do** (the `enforce`/`align` fixes, BLOCK-first) vs **raise-to-human** (the `aware` items) — that
+you can hand straight to your coding agent, and ends in a `PASS` or `BLOCKED — n` verdict. The reviewer
+audits and hands off; it never edits code itself.
 
 **Invoke the subagent** — for a deeper, multi-file audit, ask Claude in plain language, e.g.
 *"use the standards-enforcer agent to audit this repo against our standards."* It follows the same
-review protocol and returns a grouped report.
+review protocol and returns the same grouped report plus a coding-agent-ready remediation plan — it
+audits and hands off, it does not edit code.

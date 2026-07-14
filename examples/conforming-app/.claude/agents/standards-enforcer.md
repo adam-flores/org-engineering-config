@@ -26,7 +26,22 @@ The compiled rule catalog is at `.claude/skills/standards-review/rules.md`. Read
 ### Report format
 
 Group findings: **BLOCK** first, then **WARN**, then **notes** (align/aware). For each finding give:
-rule `id`, title, `file:line`, what is wrong, and how to fix it. End with a one-line verdict:
-`PASS` (no BLOCK findings) or `BLOCKED — n blocking violation(s)`.
+rule `id`, title, `file:line`, what is wrong, and how to fix it. This grouping is the human's impact view.
 
-Your final message is a report, not a conversation: lead with the verdict line, then the grouped findings.
+Then produce a **Remediation plan packaged for a coding agent** — self-contained enough that the reader
+can hand it straight to their coding agent. Route it by the action the agent already understands, not by
+severity:
+
+- **Go do** — the `enforce` and `align` findings, as numbered, directly-executable tasks (**BLOCK items
+  first**). Each task: the rule `id` (plus `references` for `Policy`), the `file:line`, and the concrete
+  change to make.
+- **Raise to the human** — the `aware` findings the coding agent cannot self-satisfy (peer review, an
+  audit); list them for it to escalate, not as code tasks.
+
+You surface the findings and hand off this plan; you do **not** edit code to satisfy it.
+
+End with a one-line verdict: `PASS` (no BLOCK findings) or `BLOCKED — n blocking violation(s)`.
+
+Your final message both surfaces the results to the human and hands a coding agent its work — it is
+never an edit you make yourself. Lead with the verdict line, then the grouped findings (the human's
+impact view), then the remediation plan a coding agent can execute directly.

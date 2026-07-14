@@ -26,7 +26,7 @@ flowchart LR
   AD --> AG[".claude/agents/standards-enforcer"]
   SK --> RV["/standards-review"]
   AG --> RV
-  RV --> REP["report:<br/>BLOCK / WARN / notes"]
+  RV --> REP["report + remediation plan:<br/>BLOCK / WARN / notes<br/>+ go-do / raise-to-human"]
 ```
 
 ## What actually blocks
@@ -72,7 +72,10 @@ self-satisfy it).
    ```
 
    It reviews your current diff (or the whole repo), and reports findings grouped **BLOCK → WARN →
-   notes**, ending in a `PASS` or `BLOCKED — n` verdict. For a deep multi-file audit, hand off to the
+   notes**, then a **remediation plan packaged for a coding agent** — routed **go-do** (the `enforce`/
+   `align` fixes, BLOCK-first) vs **raise-to-human** (the `aware` items) — that you can hand straight to
+   your coding agent in one step, ending in a `PASS` or `BLOCKED — n` verdict. The reviewer audits and
+   hands off; it does not edit code itself. For a deep multi-file audit, hand off to the
    `standards-enforcer` subagent.
 
 4. **Re-render when the guidance changes.** Re-running the adapter is the "pull the current standards"
