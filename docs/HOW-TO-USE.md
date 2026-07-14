@@ -4,6 +4,11 @@ This guide is for someone adopting `org-engineering-config` in a **new organizat
 up, get started, confirm it's working, and think about rolling it out at scale. No prior context
 assumed.
 
+> **What you adopt is the mechanism**, not the bundled rules. The rules under `guidance/` are a
+> **proof-of-concept sample** that ships so you can see the pipeline work end-to-end; a real
+> organization replaces them with its own authored rules. Everywhere below, "the guidance" means
+> *whatever rule-set you point the adapter at* — the sample today, your own once you fork it.
+
 If you just want the mental model first, read the [README](../README.md); the rule format is in
 [`GUIDANCE-SCHEMA.md`](GUIDANCE-SCHEMA.md), and how to propose changes is in
 [`CONTRIBUTING.md`](../CONTRIBUTING.md).

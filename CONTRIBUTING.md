@@ -1,8 +1,10 @@
 # Contributing guidance
 
-This repo is a **contributable source of truth for engineering standards**. Anyone can propose a new
-rule or a change to an existing one; once merged and promoted, it becomes everyone's default. This
-guide is how you do that.
+This repo is the **contributable mechanism for engineering standards** — a neutral format plus the
+method for placing a rule on it. Anyone can propose a new rule or a change to an existing one; in an
+enacted deployment, once merged and promoted it becomes everyone's default. This guide is how you do
+that. (The rules under [`guidance/`](guidance/) are a **proof-of-concept sample**; contributing to them
+here is how we demonstrate and stress-test the method, not how an organization ratifies its own policy.)
 
 If your proposal doesn't already classify itself, **apply the framework below** — every rule must land
 on all four axes. A proposal that just says "we should do X" isn't done until it's been placed as a
