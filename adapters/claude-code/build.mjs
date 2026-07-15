@@ -156,7 +156,7 @@ function main() {
   const args = process.argv.slice(2);
   const outIdx = args.indexOf('--out');
   if (outIdx === -1 || !args[outIdx + 1]) {
-    console.error('usage: node adapters/claude-code/build.mjs --out <projectDir>');
+    console.error('usage: node adapters/claude-code/build.mjs --source <guidanceRepo> --out <projectDir>');
     process.exit(2);
   }
   const outDir = resolve(args[outIdx + 1]);
@@ -169,11 +169,28 @@ function main() {
     process.exit(2);
   }
 
+  // Guardrail: an absent or empty source renders an empty catalog over the target's rules.md,
+  // leaving a reviewer that passes everything. Fail instead of quietly disarming the consumer.
+  const guidanceDir = join(sourceRoot, 'guidance');
+  if (!existsSync(guidanceDir)) {
+    console.error(`✗ no guidance/ directory at ${guidanceDir}`);
+    console.error(`  Point --source at a guidance source. This repo holds the mechanism, not a rule-set:`);
+    console.error(`    --source examples                          # the illustrative 4-rule set here`);
+    console.error(`    --source ../sample-org-engineering-config  # an org's enacted standards`);
+    process.exit(2);
+  }
+
   const { rules, errors } = loadRules(sourceRoot);
   if (errors.length) {
     console.error(`✗ validation failed (${errors.length}):`);
     for (const e of errors) console.error(`  - ${e}`);
     process.exit(1);
+  }
+  if (rules.length === 0) {
+    console.error(`✗ ${guidanceDir} contains no rules`);
+    console.error(`  Refusing to render an empty catalog: it would overwrite the target's rules.md and`);
+    console.error(`  leave a reviewer that passes everything.`);
+    process.exit(2);
   }
   const active = rules.filter(r => r.status === 'active');
   console.log(`✓ validated ${rules.length} rules (${active.filter(blocks).length} block)`);
