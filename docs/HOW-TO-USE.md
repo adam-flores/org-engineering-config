@@ -134,7 +134,11 @@ yet built — plan for them:
   scoping — which rules bind a static site vs. a data service vs. a mobile app — so the reviewer isn't
   noisy. **This is the top post-pilot gap.**
 - **Ownership.** Each rule/domain needs an accountable owner (a CODEOWNERS-style mapping or an `owner`
-  field) so changes are reviewed by the right people.
+  field) so changes are reviewed by the right people. *Deliberately not built here:* a `CODEOWNERS` file
+  only binds when branch protection requires a review from someone other than the author, so it is inert
+  in a single-maintainer repo — adding one would imply a gate that nothing backs up. Ownership is also a
+  property of an org's *enacted* standards rather than of the mechanism, so it belongs with the rules
+  when they move to their own repo.
 - **Exceptions / waivers.** A sanctioned, time-boxed deviation path (approver + expiry) so "we can't
   comply yet" is recorded, not silently ignored — richer than today's prose `## Exceptions`.
 - **The managed-platform tier.** True non-overridable enforcement (`enforcement_point:
