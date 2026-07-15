@@ -10,15 +10,13 @@ is produced by **adapters**. Individuals **pull** current guidance into their pr
 **contribute** improvements back via pull request.
 
 **Product vs. sample — keep this straight.** The *product* is the mechanism: the guidance-item schema,
-the four-axis taxonomy, the governance model, and the adapters. The 53 rules under `guidance/` are a
-**proof-of-concept sample** that exercises the mechanism, **not** enacted org policy. Don't treat the
-rule-set as the deliverable; treat it as test material we can add to, re-severity, or remove to prove
-the pipeline. (Roadmap: once validated, the sample migrates into a separate enacted-standards repo and
-this repo keeps only a light skeleton — see "Current state.")
+the four-axis taxonomy, the governance model, and the adapters. **This repo holds no org's standards.**
+The only rules here are the 4 under [`examples/guidance/`](examples/guidance/) — a fixture that gives
+the adapter something to render, chosen for axis coverage. They are not a catalog, and nothing should
+grow them into one; a full worked example lives in the sample repo (see "The four repos").
 
 Key docs: [`README.md`](README.md) (elevator pitch + the core idea), [`docs/GUIDANCE-SCHEMA.md`](docs/GUIDANCE-SCHEMA.md)
-(the guidance-item format), [`CONTRIBUTING.md`](CONTRIBUTING.md) (how to propose or change a rule),
-and the guidance catalog at [`guidance/README.md`](guidance/README.md).
+(the guidance-item format), and [`CONTRIBUTING.md`](CONTRIBUTING.md) (how to propose or change a rule).
 
 ## Current state
 
@@ -39,47 +37,44 @@ them to an external control.
 Executable tooling is authorized, but it stays under `adapters/`/`examples/` and never leaks tool
 assumptions into the neutral source.
 
-**Next: the four-repo split** — per the approved plan
-(`~/.claude/plans/org-standards-app-lexical-brooks.md`), this repo becomes pure mechanism while the
-53-rule sample, the demo, and a consumer app move to their own repos. See "Deferred redesign" below.
+## The four repos
 
-## Where we left off (2026-07-14)
+The split is **done**. This repo is the mechanism; the rules and the apps live elsewhere. Content moved
+out — don't re-add it here:
 
-Sample catalog: **53 rules** across 7 domains — 2 Policy · 20 Strategic · 31 Handbook. Enforcement
-point: 20 `ci-gate` · 5 `pre-commit` · 12 `audit` · 15 `human-review` · 1 `none`. Agent action: 18
-`enforce` · 28 `align` · 7 `aware`. **17 rules block** (required + `ci-gate`). (These are the sample's
-composition — test material, not enacted policy.)
+| Repo | Holds | Note |
+|---|---|---|
+| **this one** | Schema, taxonomy, governance model, adapters, `examples/guidance/` (4 illustrative rules) | No catalog. The 4 rules are a **fixture**, not standards |
+| `sample-org-engineering-config` | The 53-rule sample as an org's enacted standards | Rules only; renders via this repo's adapter |
+| `demo-org-engineering-config` | The "Python only" demo: 2 rules + both apps + rendered reviewers | Self-contained |
+| `sample-consumer-app` | A working Node app with planted violations | Ships **unwired** on purpose (no `.claude/`) — the reader hooks it up |
 
-**Deferred redesign (roadmap, not built yet).** Once the mechanism is validated, split the three
-concerns into three repos: (1) this repo keeps only the mechanism + a light, axis-complete skeleton
-sample; (2) a **template repository** an org instantiates to author its own enacted standards (the
-current 53-rule sample migrates here — which is why we don't trim or delete it now); (3) a **consumer
-app** outside that repo that pulls the enacted standards. Until then, everything stays in one repo so
-the mechanism is legible while we prove it.
+All four are public under `adam-flores`. Cross-repo rendering is by **relative path to a sibling
+clone**; a real deployment would vendor or pin the adapter, which is the deferred distribution layer.
 
-Resolved in the model-redesign change:
-- The two-field enforcement model (`enforcement_point` + `agent_action`) and `references` for Policy.
-- The **denylist** open thread — [`integ-denylist-tools`](guidance/integrations-tooling/denylist-tools.md)
-  now points at control register `ORG-SEC-021` as the canonical "DO NOT USE" home.
-- A consistency read-through of all 53 rules against the new model.
+**`--source` is effectively required.** The adapter reads `<source>/guidance/`, and this repo has none
+at its root. It exits `2` when the source is missing or empty rather than rendering an empty catalog
+over a consumer's `rules.md` — that failure mode shipped a reviewer that passed everything, so don't
+reintroduce a silent default.
 
-Still open / next:
-- **The four-repo split** — the deferred redesign above, now approved and in progress.
-- **`integ-tool-telemetry-off` placement** — straddles Integrations & Tooling vs Security & Compliance;
-  pick its final home.
+## Still open / next
+
 - **The CI workflows** — freshness gate, promotion, bump bot. Until these exist, the pinned + current
   governance model is designed but unenforced; don't describe it as though it runs.
+- **`integ-tool-telemetry-off` placement** — straddles Integrations & Tooling vs Security & Compliance;
+  pick its final home. Lives in the sample repo now.
+- **Distribution** — vendoring/pinning the adapter, so consumers stop reaching across the filesystem.
 
 ## Conventions
 
 ### The mechanism is the product; prose is how we express it (for now)
 
 - The product is the **mechanism** (schema, taxonomy, governance model, adapters). While we prove it,
-  that mechanism — and the sample rule-set that exercises it — is expressed as prose and metadata:
-  clear, reviewable markdown. Optimize every change for a reviewer reading top-to-bottom.
-- Keep the README as the **index and summary** and the guidance catalog
-  ([`guidance/README.md`](guidance/README.md)) as the **sample** rule index; detail lives in each rule
-  file and in `docs/`. If any two of them disagree, that's a bug — fix it in the same change.
+  that mechanism is expressed as prose and metadata: clear, reviewable markdown. Optimize every change
+  for a reviewer reading top-to-bottom.
+- Keep the README as the **index and summary**; detail lives in `docs/` and in each adapter's README.
+  If any two of them disagree, that's a bug — fix it in the same change. That now spans repos: a claim
+  here about the sample, the demo, or the consumer app must match what those repos actually do.
 - Prefer plain markdown. Tables for taxonomies. No build steps in the neutral source.
 
 ### Terminology (use these exact terms)
@@ -116,11 +111,14 @@ Still open / next:
 
 ### What not to do
 
-- Build tooling (adapter, sample apps, CI) is authorized Phase-2 work — keep it under
-  `adapters/`/`examples/`, never inside `guidance/`. The neutral source stays markdown + metadata.
+- Build tooling stays under `adapters/`; a guidance source stays markdown + metadata, never code.
+- **Don't grow `examples/guidance/` into a catalog.** It's a 4-rule fixture for axis coverage. New
+  rules belong in a standards repo, not here — re-merging the two is the thing this split undid.
 - No tool-specific assumptions leaking into the neutral source. Guidance items describe *what* is
   required, never *which tool* enforces it.
 - No silent local overrides of org guidance — org guidance is authoritative by design.
+- Don't give the adapter a default `--source`. It exits `2` on a missing or empty source on purpose:
+  silently rendering an empty catalog leaves a reviewer that passes everything.
 
 ## Review focus
 

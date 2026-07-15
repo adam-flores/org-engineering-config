@@ -14,17 +14,27 @@ file and the catalog always reflects the current rules.
 ## Usage
 
 ```
-node adapters/claude-code/build.mjs --out <projectDir> [--source <guidanceCheckout>]
+node adapters/claude-code/build.mjs --source <guidanceRepo> --out <projectDir>
 ```
 
+- `--source` — the **standards repo** to render from; the adapter reads `<source>/guidance/`. Point it
+  at a pinned checkout to render exactly what a project has pinned. This repo holds the mechanism, not
+  a catalog, so there is no useful default — if `<source>/guidance/` is missing or empty, the adapter
+  exits `2` rather than render an empty rule-set over your project.
 - `--out` — the target **project** directory. Artifacts are written under `<projectDir>/.claude/`.
   The adapter **refuses to write to the global `~/.claude` profile**.
-- `--source` — optional guidance checkout to render from (defaults to this repo). Point it at a
-  pinned version to render exactly what a project has pinned.
+
+```sh
+# an org's enacted standards, from a sibling clone
+node adapters/claude-code/build.mjs --source ../sample-org-engineering-config --out /path/to/your-project
+
+# the illustrative 4-rule set in this repo, to try it locally
+node adapters/claude-code/build.mjs --source examples --out /path/to/your-project
+```
 
 ## What it does
 
-1. Parses and **validates** every rule in `guidance/`: required fields present, enum values legal
+1. Parses and **validates** every rule in `<source>/guidance/`: required fields present, enum values legal
    (`severity`, `enforcement_point`, `agent_action`, `status`), ids unique and domain-prefixed,
    `domain` matches its folder, `since` is semver, and every `Policy` rule carries `references`. If
    validation fails it prints each error, writes nothing, and exits non-zero.
@@ -49,7 +59,7 @@ context. For the org-level picture — pulling/pinning a version, rolling it out
 Run the adapter once, pointing `--out` at the project you want reviewed:
 
 ```bash
-node adapters/claude-code/build.mjs --out /path/to/your-project
+node adapters/claude-code/build.mjs --source ../sample-org-engineering-config --out /path/to/your-project
 ```
 
 That writes three files into your project (creating `.claude/` if needed):
@@ -74,7 +84,7 @@ to the org and its projects, not to one person's personal setup. Commit `.claude
 changed rules flow into `rules.md` with no edits to the skill or agent:
 
 ```bash
-node adapters/claude-code/build.mjs --out /path/to/your-project
+node adapters/claude-code/build.mjs --source ../sample-org-engineering-config --out /path/to/your-project
 ```
 
 ## 2. Use it in Claude Code

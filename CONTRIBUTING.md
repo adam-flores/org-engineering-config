@@ -3,8 +3,10 @@
 This repo is the **contributable mechanism for engineering standards** — a neutral format plus the
 method for placing a rule on it. Anyone can propose a new rule or a change to an existing one; in an
 enacted deployment, once merged and promoted it becomes everyone's default. This guide is how you do
-that. (The rules under [`guidance/`](guidance/) are a **proof-of-concept sample**; contributing to them
-here is how we demonstrate and stress-test the method, not how an organization ratifies its own policy.)
+that. (This repo holds the **method**, not any org's rules. Rules live in their own repo — the worked
+example is [sample-org-engineering-config](https://github.com/adam-flores/sample-org-engineering-config).
+The steps below describe authoring a rule *in whichever repo holds your standards*; contributing to the
+sample is how we stress-test the method, not how an organization ratifies its own policy.)
 
 If your proposal doesn't already classify itself, **apply the framework below** — every rule must land
 on all four axes. A proposal that just says "we should do X" isn't done until it's been placed as a
@@ -75,14 +77,14 @@ named control exists; omit for `Handbook`.
 ## Adding or changing a rule
 
 1. **One idea per pull request.** Keep the diff small and reviewable.
-2. **Create the file** under `guidance/<domain-slug>/<short-name>.md`, using the template and
+2. **Create the file** in your standards repo under `guidance/<domain-slug>/<short-name>.md`, using the template and
    frontmatter in [`docs/GUIDANCE-SCHEMA.md`](docs/GUIDANCE-SCHEMA.md). The `id` is
    `<prefix>-<short-name>` (e.g. `sec-no-plaintext-secrets`) and is a permanent contract — **never
    rename or renumber it** once merged; to retire a rule, set `status: deprecated`.
 3. **Write the body** — Rule, Rationale, Scope, Enforcement, References (Policy only), Exceptions. In
    Enforcement, state plainly what catches the rule (or admit `none`) and what a coding agent does
    about it; don't imply a block the enforcement point can't back up.
-4. **Update the catalog index** ([`guidance/README.md`](guidance/README.md)) so the new rule is listed.
+4. **Update the catalog index** (your standards repo's `guidance/README.md`) so the new rule is listed.
 5. **Open the PR.** Explain the change in one or two sentences and name the `(domain, severity,
    enforcement_point, agent_action)` you chose and why — especially any `ci-gate`/`managed-platform`
    claim (what gate?) or a `Strategic` + `human-review`/`none` (why it's required despite being

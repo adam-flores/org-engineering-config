@@ -1,9 +1,9 @@
 # org-engineering-config
 
 > **Status: the mechanism works end-to-end; governance has no teeth yet.** The neutral guidance-item
-> schema, a sample rule-set across all seven domains, the Claude Code adapter, two worked example apps,
-> and an adoption guide are all in place. The CI workflows that make "pinned + current" enforceable are
-> not (see [what's left](#whats-left)). Feedback on both the design and the source format is welcome.
+> schema, the Claude Code adapter, worked examples, and an adoption guide are all in place. The CI
+> workflows that make "pinned + current" enforceable are not (see [what's left](#whats-left)). Feedback
+> on both the design and the source format is welcome.
 
 A **tool-agnostic, versioned, contributable mechanism for engineering standards** — the way an
 organization scales any shared standard. Individuals **pull** current guidance into their projects and
@@ -11,10 +11,9 @@ organization scales any shared standard. Individuals **pull** current guidance i
 
 > **What is the product here?** The product is the **mechanism** — the neutral guidance-item schema, the
 > four-axis taxonomy, the pinned + CI-freshness governance model, and the adapters that render the source
-> into a tool. The rules under [`guidance/`](guidance/) are a **proof-of-concept sample** that exercises
-> that mechanism, **not** an enacted org standard: they let us prove the pipeline end-to-end. A real
-> organization replaces them with its own authored rules — see [what's left](#whats-left) for how the
-> sample eventually migrates out into an enacted-standards repo.
+> into a tool. This repo holds **no org's standards**. Rules live in their own repo, authored and owned by
+> the org that enacts them; see [the four repos](#the-four-repos). What's here is a
+> [4-rule illustrative set](examples/guidance/) — a fixture for the adapter, not a catalog.
 
 ## The core idea
 
@@ -79,29 +78,39 @@ organization scales any shared standard. Individuals **pull** current guidance i
 - Is **pinned + CI-enforced currency** the right governance tradeoff versus always-latest or hard-pinned?
 - Is the **neutral-core + adapters** separation worth the indirection, or over-engineered for now?
 
+## The four repos
+
+The split mirrors a real deployment: the mechanism is product, standards are content an org owns, and
+the apps that consume them live somewhere else entirely.
+
+| Repo | Role |
+|---|---|
+| **this one** | The **mechanism** — the schema, the taxonomy, the governance model, and the adapters |
+| [sample-org-engineering-config](https://github.com/adam-flores/sample-org-engineering-config) | The **standards** — 53 rules across seven domains, as an org would enact them |
+| [demo-org-engineering-config](https://github.com/adam-flores/demo-org-engineering-config) | A **demo** — two rules that block a Node app and pass its Python rewrite |
+| [sample-consumer-app](https://github.com/adam-flores/sample-consumer-app) | A **consumer** — a working app with planted violations, shipped unwired for you to hook up |
+
 ## Repository contents
 
 - [`CLAUDE.md`](CLAUDE.md) — how to work in this repo (project overview, conventions, current state).
 - [`docs/HOW-TO-USE.md`](docs/HOW-TO-USE.md) — adopt this in an org: setup, worked samples, and a "how I know it's working" self-check.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — how to propose or change a rule, using the classification framework.
 - [`docs/GUIDANCE-SCHEMA.md`](docs/GUIDANCE-SCHEMA.md) — the neutral guidance-item format (frontmatter + body).
-- [`guidance/`](guidance/) — the guidance catalog: a **sample rule-set** (proof-of-concept, not enacted policy) across all seven domains ([index](guidance/README.md)).
 - [`adapters/`](adapters/) — build targets that render the neutral source into a tool's format; the
   [Claude Code adapter](adapters/claude-code/) generates a `standards-review` skill + `standards-enforcer` agent.
-- [`examples/`](examples/) — a conforming and a violating sample app, each with the rendered reviewer, to see it pass and block.
-- [`examples/demos/python-only/`](examples/demos/python-only/) — a self-contained, demoable scenario: its own two-rule guidance ("Python only, Node prohibited") renders a reviewer that **blocks** a Node app with a "rewrite it in Python" remediation task and **passes** the Python rewrite — a vivid before/after showing that swapping the guidance changes enforcement with no code change.
+- [`examples/guidance/`](examples/guidance/) — a **4-rule illustrative set**, chosen so that between them
+  they emit every classification the adapter can produce. A fixture for rendering and tests, not a catalog.
 
 ## What's built
 
 - **The mechanism** — the neutral guidance-item schema, the four-axis taxonomy, and the pinned +
   freshness-gate governance model, described above.
-- **A sample rule-set** — 53 rules across all seven domains, exercising every axis
-  ([`guidance/`](guidance/)). Proof-of-concept test material, not enacted policy.
-- **The Claude Code adapter** — renders the neutral source into a `standards-review` skill and a
+- **The Claude Code adapter** — renders any guidance source into a `standards-review` skill and a
   `standards-enforcer` agent ([`adapters/claude-code/`](adapters/claude-code/)).
-- **Worked examples** — a conforming and a violating app, plus a self-contained
-  ["Python only" before/after demo](examples/demos/python-only/) showing that swapping the guidance
-  changes enforcement with no code change ([`examples/`](examples/)).
+- **Worked examples** — an [enacted-standards sample](https://github.com/adam-flores/sample-org-engineering-config)
+  of 53 rules, a [before/after demo](https://github.com/adam-flores/demo-org-engineering-config) proving
+  that swapping the guidance changes enforcement with no code change, and an
+  [unwired consumer app](https://github.com/adam-flores/sample-consumer-app) to wire up yourself.
 - **An adoption guide** — [`docs/HOW-TO-USE.md`](docs/HOW-TO-USE.md).
 
 ## What's left
@@ -113,6 +122,5 @@ organization scales any shared standard. Individuals **pull** current guidance i
 - **Scoping, ownership, and waivers** — `applies_to` scoping so the reviewer isn't noisy, an
   accountable owner per rule/domain, and a time-boxed exception path. See the design notes in
   [`docs/HOW-TO-USE.md`](docs/HOW-TO-USE.md#scaling-the-rollout-design-notes).
-- **The product/sample split** — separating the mechanism, an org's enacted standards, and a consuming
-  app into their own repos. Today they live here together on purpose: it keeps the mechanism legible
-  while we prove it.
+- **A real distribution layer** — consumers currently render by relative path to a sibling clone of this
+  repo. A real deployment would vendor or pin the adapter, or publish it as a package.
