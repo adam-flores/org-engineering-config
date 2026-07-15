@@ -1,10 +1,9 @@
 # org-engineering-config
 
-> **Status: Stage 3 done — Phase-2 build underway.** The design (Stage 1), the neutral guidance-item
-> schema with a sample rule-set across all seven domains (Stage 2), and Stage 3's enforcement redesign —
-> splitting *where a violation is caught* from *what a coding agent should do about it* — are all in
-> place. The Claude Code adapter, two worked example apps, and an adoption guide are built; CI
-> workflows are still ahead (see below). Feedback on both the design and the source format is welcome.
+> **Status: the mechanism works end-to-end; governance has no teeth yet.** The neutral guidance-item
+> schema, a sample rule-set across all seven domains, the Claude Code adapter, two worked example apps,
+> and an adoption guide are all in place. The CI workflows that make "pinned + current" enforceable are
+> not (see [what's left](#whats-left)). Feedback on both the design and the source format is welcome.
 
 A **tool-agnostic, versioned, contributable mechanism for engineering standards** — the way an
 organization scales any shared standard. Individuals **pull** current guidance into their projects and
@@ -14,8 +13,8 @@ organization scales any shared standard. Individuals **pull** current guidance i
 > four-axis taxonomy, the pinned + CI-freshness governance model, and the adapters that render the source
 > into a tool. The rules under [`guidance/`](guidance/) are a **proof-of-concept sample** that exercises
 > that mechanism, **not** an enacted org standard: they let us prove the pipeline end-to-end. A real
-> organization replaces them with its own authored rules — see [staged rollout](#staged-rollout) for how
-> the sample eventually migrates out into an enacted-standards repo.
+> organization replaces them with its own authored rules — see [what's left](#whats-left) for how the
+> sample eventually migrates out into an enacted-standards repo.
 
 ## The core idea
 
@@ -80,7 +79,7 @@ organization scales any shared standard. Individuals **pull** current guidance i
 - Is **pinned + CI-enforced currency** the right governance tradeoff versus always-latest or hard-pinned?
 - Is the **neutral-core + adapters** separation worth the indirection, or over-engineered for now?
 
-## Repository contents (today)
+## Repository contents
 
 - [`CLAUDE.md`](CLAUDE.md) — how to work in this repo (project overview, conventions, current stage).
 - [`docs/HOW-TO-USE.md`](docs/HOW-TO-USE.md) — adopt this in an org: setup, worked samples, and a "how I know it's working" self-check.
@@ -92,22 +91,28 @@ organization scales any shared standard. Individuals **pull** current guidance i
 - [`examples/`](examples/) — a conforming and a violating sample app, each with the rendered reviewer, to see it pass and block.
 - [`examples/demos/python-only/`](examples/demos/python-only/) — a self-contained, demoable scenario: its own two-rule guidance ("Python only, Node prohibited") renders a reviewer that **blocks** a Node app with a "rewrite it in Python" remediation task and **passes** the Python rewrite — a vivid before/after showing that swapping the guidance changes enforcement with no code change.
 
-## Staged rollout
+## What's built
 
-- **Stage 1 — done:** the design + conventions, for peer review.
-- **Stage 2 — done:** the neutral guidance-item schema and a sample rule-set authored across all seven
-  domains to exercise the mechanism (a real org replaces it with its own).
-- **Stage 3 — done:** enforcement split into `enforcement_point` (where a violation is caught) and
-  `agent_action` (what a coding agent does), with control `references` on `Policy` rules.
-- **Phase 2 (build) — in progress:** the [Claude Code adapter](adapters/claude-code/) renders the
-  neutral source into a `standards-review` skill and `standards-enforcer` agent, with two
-  [example apps](examples/) (conforming + violating) and a [How-To-Use adoption guide](docs/HOW-TO-USE.md).
-  Next: the GitHub Actions (freshness gate, promotion, bump bot).
-- **Phase 2 (enforcement) — later:** the non-overridable managed-settings tier and live-fire
-  validation (a policy that intentionally breaks one app, to prove the gate blocks in anger).
-- **Later — the product/sample split (roadmap, not built):** once the mechanism is validated, separate
-  the three concerns into three repos: (1) **this repo** keeps only the *mechanism* plus a light,
-  axis-complete skeleton sample; (2) a **template repository** an org instantiates to author its own
-  enacted standards (the current sample rule-set migrates here); (3) a **consumer app** outside that
-  repo that pulls the enacted standards. Today everything lives here, together, on purpose — it keeps
-  the mechanism legible while we prove it.
+- **The mechanism** — the neutral guidance-item schema, the four-axis taxonomy, and the pinned +
+  freshness-gate governance model, described above.
+- **A sample rule-set** — 53 rules across all seven domains, exercising every axis
+  ([`guidance/`](guidance/)). Proof-of-concept test material, not enacted policy.
+- **The Claude Code adapter** — renders the neutral source into a `standards-review` skill and a
+  `standards-enforcer` agent ([`adapters/claude-code/`](adapters/claude-code/)).
+- **Worked examples** — a conforming and a violating app, plus a self-contained
+  ["Python only" before/after demo](examples/demos/python-only/) showing that swapping the guidance
+  changes enforcement with no code change ([`examples/`](examples/)).
+- **An adoption guide** — [`docs/HOW-TO-USE.md`](docs/HOW-TO-USE.md).
+
+## What's left
+
+- **The CI workflows** — the freshness gate, promotion, and bump bot. Governance is *designed* today,
+  not *enforced*: nothing yet fails a pull request for drifting behind `stable`.
+- **The managed-platform tier** — non-overridable settings, plus live-fire validation (a policy that
+  intentionally breaks one app, to prove the gate blocks in anger).
+- **Scoping, ownership, and waivers** — `applies_to` scoping so the reviewer isn't noisy, an
+  accountable owner per rule/domain, and a time-boxed exception path. See the design notes in
+  [`docs/HOW-TO-USE.md`](docs/HOW-TO-USE.md#scaling-the-rollout-design-notes).
+- **The product/sample split** — separating the mechanism, an org's enacted standards, and a consuming
+  app into their own repos. Today they live here together on purpose: it keeps the mechanism legible
+  while we prove it.
