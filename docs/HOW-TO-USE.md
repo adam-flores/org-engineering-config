@@ -75,7 +75,10 @@ self-satisfy it).
    notes**, then a **remediation plan packaged for a coding agent** — routed **go-do** (the `enforce`/
    `align` fixes, BLOCK-first) vs **raise-to-human** (the `aware` items) — that you can hand straight to
    your coding agent in one step, ending in a `PASS` or `BLOCKED — n` verdict. The reviewer audits and
-   hands off; it does not edit code itself. For a deep multi-file audit, hand off to the
+   hands off; it does not edit code itself. By default the receiving coding agent **surfaces that plan to
+   you for approval before executing any "go do" task** — running unprompted only under an
+   autonomous-execution posture you've established — so a human stays in the loop; the "raise to the
+   human" items are always escalated, never auto-run. For a deep multi-file audit, hand off to the
    `standards-enforcer` subagent.
 
 4. **Re-render when the guidance changes.** Re-running the adapter is the "pull the current standards"

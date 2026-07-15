@@ -95,7 +95,10 @@ It reviews your current diff by default (or the whole repo), then reports findin
 **BLOCK → WARN → notes**, followed by a **remediation plan packaged for a coding agent** — routed
 **go-do** (the `enforce`/`align` fixes, BLOCK-first) vs **raise-to-human** (the `aware` items) — that
 you can hand straight to your coding agent, and ends in a `PASS` or `BLOCKED — n` verdict. The reviewer
-audits and hands off; it never edits code itself.
+audits and hands off; it never edits code itself. The receiving coding agent **defaults to surfacing the
+plan for your approval before executing** any "go do" task — running unprompted only under an
+autonomous-execution posture you've set — so responsibility for putting the plan into motion stays with a
+person; the "raise to the human" items are always escalated, never auto-run.
 
 **Invoke the subagent** — for a deeper, multi-file audit, ask Claude in plain language, e.g.
 *"use the standards-enforcer agent to audit this repo against our standards."* It follows the same
