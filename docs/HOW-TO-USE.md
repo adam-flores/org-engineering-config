@@ -4,9 +4,10 @@ This guide is for someone adopting `org-engineering-config` in a **new organizat
 up, get started, confirm it's working, and think about rolling it out at scale. No prior context
 assumed.
 
-> **What you adopt is the mechanism**, not the bundled rules. The rules under `guidance/` are a
-> **proof-of-concept sample** that ships so you can see the pipeline work end-to-end; a real
-> organization replaces them with its own authored rules. Everywhere below, "the guidance" means
+> **What you adopt is the mechanism**, not anyone else's rules. This repo ships no catalog; the worked
+> example, [sample-org-engineering-config](https://github.com/adam-flores/sample-org-engineering-config),
+> exists so you can see the pipeline work end-to-end, and a real organization authors its own in a repo
+> it owns. Everywhere below, "the guidance" means
 > *whatever rule-set you point the adapter at* — the sample today, your own once you fork it.
 
 If you just want the mental model first, read the [README](../README.md); the rule format is in
@@ -21,7 +22,7 @@ packaging; you never hand-write the tool config.
 
 ```mermaid
 flowchart LR
-  G["guidance/*.md<br/>(neutral source of truth)"] --> AD["adapter<br/>build.mjs"]
+  G["&lt;standards repo&gt;/guidance/*.md<br/>(neutral source of truth)"] --> AD["adapter<br/>build.mjs<br/>--source"]
   AD --> SK[".claude/skills/standards-review"]
   AD --> AG[".claude/agents/standards-enforcer"]
   SK --> RV["/standards-review"]
@@ -57,7 +58,7 @@ self-satisfy it).
    global `~/.claude`):
 
    ```bash
-   node adapters/claude-code/build.mjs --out /path/to/your-project
+   node adapters/claude-code/build.mjs --source ../sample-org-engineering-config --out /path/to/your-project
    ```
 
    This validates every rule, then generates:
@@ -95,31 +96,37 @@ flowchart LR
 
 ## How I know it's working
 
-Don't take it on faith — the repo ships a **known-good** and a **known-bad** app so you can see the
-reviewer succeed and fail on purpose.
+Don't take it on faith — two companion repos let you watch the reviewer fail and pass on purpose.
 
-- **[`examples/conforming-app`](../examples/conforming-app)** is written to satisfy the rules. Running
-  `/standards-review` against it returns **`PASS` — zero BLOCK findings**. (Its tests also pass:
-  `cd examples/conforming-app && node --test`.)
-- **[`examples/violating-app`](../examples/violating-app)** plants one violation per severity band.
-  Running `/standards-review` against it returns a **`BLOCKED`** verdict — at least the three
-  `ci-gate` violations below, and often related findings the reviewer derives (e.g. a skipped-only
-  suite failing `qual-unit-test-coverage`). Exact counts vary with the review:
+- **[sample-consumer-app](https://github.com/adam-flores/sample-consumer-app)** is a working app that
+  violates the standards six ways. It ships **unwired on purpose** — no `.claude/` — so hooking up the
+  reviewer is the exercise; its README walks you through it and lists the expected findings. Rendered
+  against the 53-rule sample, `/standards-review` should return **`BLOCKED`**, with at least the three
+  `ci-gate` violations below. Exact counts vary with the review — an LLM reviewer often derives related
+  findings too.
 
   | Finding | Rule | Result |
   |---|---|---|
-  | hardcoded secret (`src/config.mjs`) | `sec-no-plaintext-secrets` (Policy · ci-gate) | **BLOCK** + cites `SOC2 CC6.1`, `ISO 27001 A.9.2.3`, `NIST SP 800-53 IA-5` |
-  | local SQLite (`src/db.mjs`) | `arch-no-local-sql-databases` (Strategic · ci-gate) | **BLOCK** |
-  | skipped test (`test/server.test.mjs`) | `qual-no-skipped-tests` (Strategic · ci-gate) | **BLOCK** |
-  | unpinned CI action (`ci.yml`) | `integ-pin-third-party-actions` (Handbook · ci-gate) | **WARN** |
-  | PII in a log (`src/server.mjs`) | `obs-no-pii-in-logs` (Strategic · audit) | required, unenforceable — surfaced, not blocked |
-  | unclassified personal data (`src/server.mjs`) | `obs-data-classification` (Strategic · audit · **aware**) | required, unenforceable — **raise to the human** in the remediation plan |
+  | hardcoded API key, session secret, and DSN (`src/config.mjs`) | `sec-no-plaintext-secrets` (Policy · ci-gate) | **BLOCK** + cites `SOC2 CC6.1`, `ISO 27001 A.9.2.3`, `NIST SP 800-53 IA-5` |
+  | local SQLite holding app data (`src/db.mjs`) | `arch-no-local-sql-databases` (Strategic · ci-gate) | **BLOCK** |
+  | focus marker + untracked skip (`test/signup.test.mjs`) | `qual-no-skipped-tests` (Strategic · ci-gate) | **BLOCK** |
+  | unpinned CI actions (`ci.yml`) | `integ-pin-third-party-actions` (**Handbook** · ci-gate) | **WARN** — same gate as the blockers, but recommended, so it can't block |
+  | PII in a log (`src/server.mjs`) | `obs-no-pii-in-logs` (Strategic · audit · **enforce**) | required, unenforceable — **go do**: the agent redacts it |
+  | unclassified personal data at rest (`src/db.mjs`) | `obs-data-classification` (Strategic · audit · **aware**) | required, unenforceable — **raise to the human** |
+
+  The last two are the taxonomy earning its keep: same domain, same severity, same enforcement point —
+  different `agent_action`, so they route differently.
+
+- **[demo-org-engineering-config](https://github.com/adam-flores/demo-org-engineering-config)** is the
+  pass/fail pair. Two rules ("Python only, Node prohibited") **block** a Node service with a single
+  "rewrite it in Python" task, and **pass** its Python rewrite. Same reviewer, same machinery — only
+  the language differs.
 
 **Your self-check on a real repo:** render the reviewer into a clean project → expect `PASS`. Then
 plant one obvious violation (commit a fake `API_KEY = "..."`), re-run → expect a **BLOCK** finding that
 names the rule and cites its control IDs. If both hold, the pipeline is wired end-to-end.
 
-**The wiring is decoupled, on purpose.** Edit a rule in `guidance/` and re-render — the reviewer picks
+**The wiring is decoupled, on purpose.** Edit a rule in your standards repo and re-render — the reviewer picks
 it up with no code change. Verified behaviors: adding a rule increases the catalog; flipping a rule
 `Handbook → Strategic` turns a WARN into a BLOCK; moving its `enforcement_point` from `human-review`
 to `ci-gate` makes a required-but-unenforceable rule start blocking; a new Policy `references` entry

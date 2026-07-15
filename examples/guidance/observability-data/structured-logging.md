@@ -34,6 +34,9 @@ are out of scope.
 
 ## Exceptions
 
-Advisory (Handbook): warns rather than blocks. Pairs with
-[`obs-logs-to-approved-sink`](logs-to-approved-sink.md) (where the logs go) and
-[`obs-correlation-ids`](correlation-ids.md) (the field that ties a request together).
+Advisory (Handbook): warns rather than blocks. In a full catalog this pairs with rules covering where
+the logs go and the correlation field that ties a request together — see
+[`obs-logs-to-approved-sink`](https://github.com/adam-flores/sample-org-engineering-config/blob/main/guidance/observability-data/logs-to-approved-sink.md)
+and
+[`obs-correlation-ids`](https://github.com/adam-flores/sample-org-engineering-config/blob/main/guidance/observability-data/correlation-ids.md)
+in the sample. This illustrative set carries neither.

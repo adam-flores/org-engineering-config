@@ -10,7 +10,10 @@ One rule = one markdown file with **YAML frontmatter** (the machine-readable met
 **markdown body** (the human-readable rule and its rationale). The frontmatter carries the
 `domain × severity × enforcement_point × agent_action` taxonomy; the body carries the prose.
 
-Items live under [`../guidance/`](../guidance/), one folder per domain:
+Items live under `guidance/` **in a standards repo**, one folder per domain. This repo holds the
+mechanism, so its only rules are the [4-rule illustrative set](../examples/guidance/); the worked
+example of a full catalog is
+[sample-org-engineering-config](https://github.com/adam-flores/sample-org-engineering-config).
 
 ```
 guidance/

@@ -1,8 +1,0 @@
-[project]
-name = "greeting-service"
-version = "1.0.0"
-description = "A tiny greeting HTTP service — implemented in Python (the approved language)."
-requires-python = ">=3.9"
-
-[project.scripts]
-greeting-service = "app:main"

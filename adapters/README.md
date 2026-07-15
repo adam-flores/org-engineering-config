@@ -1,16 +1,16 @@
 # Adapters
 
-Adapters render the neutral guidance source ([`../guidance/`](../guidance/)) into a specific tool's
-native packaging. The neutral source is the product; adapters are **build targets** — they add no
-rules and change no meaning, they only translate the same `domain × severity × enforcement_point ×
+Adapters render a neutral guidance source into a specific tool's native packaging. The source is a
+`guidance/` tree in a standards repo, passed with `--source`; adapters are **build targets** — they add
+no rules and change no meaning, they only translate the same `domain × severity × enforcement_point ×
 agent_action` model into a form a given tool can consume.
 
 ## The pattern
 
 ```
-guidance/*.md            adapters/<tool>/            <target project>
-(neutral source    ─────► render/validate    ─────► tool-native packaging
- of truth)                (build step)                (skill, agent, config, …)
+<source>/guidance/*.md      adapters/<tool>/            <target project>
+(neutral source      ─────► render/validate    ─────► tool-native packaging
+ of truth)                  (build step)                (skill, agent, config, …)
 ```
 
 Every adapter follows the same contract:
