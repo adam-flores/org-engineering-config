@@ -13,29 +13,35 @@ is produced by **adapters**. Individuals **pull** current guidance into their pr
 the four-axis taxonomy, the governance model, and the adapters. The 53 rules under `guidance/` are a
 **proof-of-concept sample** that exercises the mechanism, **not** enacted org policy. Don't treat the
 rule-set as the deliverable; treat it as test material we can add to, re-severity, or remove to prove
-the pipeline. (Roadmap: once validated, the sample migrates into a separate template/enacted-standards
-repo and this repo keeps only a light skeleton — see "Current stage.")
+the pipeline. (Roadmap: once validated, the sample migrates into a separate enacted-standards repo and
+this repo keeps only a light skeleton — see "Current state.")
 
 Key docs: [`README.md`](README.md) (elevator pitch + the core idea), [`docs/GUIDANCE-SCHEMA.md`](docs/GUIDANCE-SCHEMA.md)
 (the guidance-item format), [`CONTRIBUTING.md`](CONTRIBUTING.md) (how to propose or change a rule),
 and the guidance catalog at [`guidance/README.md`](guidance/README.md).
 
-## Current stage
+## Current state
 
-**Stage 3 — the design polish is landing, and we're crossing into Phase-2 build.** Stages 1–2 are done
-(the design, the guidance-item schema, and a sample rule-set across all seven domains). Stage 3's headline
-change is complete: enforcement is now **two axes** — `enforcement_point` (*where* a violation is
-caught: `coding-agent`/`pre-commit`/`ci-gate`/`managed-platform`/`human-review`/`audit`/`none`) and
-`agent_action` (*what a coding agent does*: `enforce`/`align`/`aware`). Severity still means *how
+**The mechanism works end-to-end; governance has no teeth yet.** In place: the guidance-item schema, a
+sample rule-set across all seven domains, the Claude Code adapter (`adapters/claude-code/`) that renders
+the neutral source into a reviewer skill + agent, two `examples/` apps plus the `python-only` demo, and
+the `docs/HOW-TO-USE.md` adoption guide. Not built: the CI workflows (freshness gate, promotion, bump
+bot) that make "pinned + current" enforceable, and the managed-platform tier. Keep that distinction
+honest in prose — the README's "What's left" is the canonical list.
+
+Enforcement is **two axes**: `enforcement_point` (*where* a violation is caught:
+`coding-agent`/`pre-commit`/`ci-gate`/`managed-platform`/`human-review`/`audit`/`none`) and
+`agent_action` (*what a coding agent does*: `enforce`/`align`/`aware`). Severity means *how
 authoritative* (required vs recommended). A rule blocks only when it is required **and** its
-`enforcement_point` is `ci-gate`/`managed-platform`. `Policy` rules now carry a `references` list
-mapping them to an external control.
+`enforcement_point` is `ci-gate`/`managed-platform`. `Policy` rules carry a `references` list mapping
+them to an external control.
 
-Per the approved plan (`~/.claude/plans/let-s-build-out-a-golden-iverson.md`), the next steps cross
-into **Phase-2 build work**: a Claude Code **adapter** (`adapters/claude-code/`) that renders the
-neutral guidance into a reviewer skill + agent, then two `examples/` apps + a test matrix, then a
-How-To-Use adoption guide. That work introduces **executable tooling** — authorized by the current
-plan, kept under `adapters/`/`examples/`, and never leaking tool assumptions into the neutral source.
+Executable tooling is authorized, but it stays under `adapters/`/`examples/` and never leaks tool
+assumptions into the neutral source.
+
+**Next: the four-repo split** — per the approved plan
+(`~/.claude/plans/org-standards-app-lexical-brooks.md`), this repo becomes pure mechanism while the
+53-rule sample, the demo, and a consumer app move to their own repos. See "Deferred redesign" below.
 
 ## Where we left off (2026-07-14)
 
@@ -58,12 +64,11 @@ Resolved in the model-redesign change:
 - A consistency read-through of all 53 rules against the new model.
 
 Still open / next:
+- **The four-repo split** — the deferred redesign above, now approved and in progress.
 - **`integ-tool-telemetry-off` placement** — straddles Integrations & Tooling vs Security & Compliance;
   pick its final home.
-- **Phase B** — the Claude Code adapter: validate frontmatter + render the `standards-review` skill and
-  `standards-enforcer` agent from `guidance/`.
-- **Phase C** — two `examples/` apps (conforming + violating) + the test matrix.
-- **Phase D (gated on A–C passing)** — `docs/HOW-TO-USE.md` adoption guide with mermaid visuals.
+- **The CI workflows** — freshness gate, promotion, bump bot. Until these exist, the pinned + current
+  governance model is designed but unenforced; don't describe it as though it runs.
 
 ## Conventions
 
@@ -107,8 +112,7 @@ Still open / next:
   affected rules, the catalog index) so the repo never contradicts itself.
 - Don't overstate a rule's teeth: never imply a block the `enforcement_point` can't back up.
 - Write in the second person for reviewer-facing prose, present tense for how the system behaves.
-- Mark future work explicitly (Phase B/C/D); don't reference tooling that doesn't exist yet as
-  though it does.
+- Mark future work explicitly; don't reference tooling that doesn't exist yet as though it does.
 
 ### What not to do
 
